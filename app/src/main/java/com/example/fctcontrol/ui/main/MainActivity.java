@@ -1,8 +1,10 @@
-package com.example.fctcontrol;
+package com.example.fctcontrol.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.fctcontrol.R;
 
 public class MainActivity extends AppCompatActivity {
 
