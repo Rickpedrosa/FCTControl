@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/visitsExpositorFragment">
+    <fragment
+        android:id="@+id/visitsExpositorFragment"
+        android:name="com.example.fctcontrol.ui.visitas.VisitsExpositorFragment"
+        android:label="Visits"
+        tools:layout="@layout/fragment_expovisitas" >
+        <action
+            android:id="@+id/action_visitsExpositorFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentExpositorFragment"
+        android:name="com.example.fctcontrol.ui.alumnos.StudentExpositorFragment"
+        android:label="Students"
+        tools:layout="@layout/fragment_expoalumnos" />
+    <fragment
+        android:id="@+id/businessExpositorFragment"
+        android:name="com.example.fctcontrol.ui.empresas.BusinessExpositorFragment"
+        android:label="Business"
+        tools:layout="@layout/fragment_expoempresas" />
+    <fragment
+        android:id="@+id/meetingsExpositorFragment"
+        android:name="com.example.fctcontrol.ui.reuniones.MeetingsExpositorFragment"
+        android:label="Meetings"
+        tools:layout="@layout/fragment_reuniones" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.example.fctcontrol.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

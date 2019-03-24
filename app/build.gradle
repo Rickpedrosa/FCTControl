@@ -46,13 +46,15 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'android.arch.navigation:navigation-ui:1.0.0'
 
+    implementation "androidx.preference:preference:1.1.0-alpha04"
+
     // For Room. X.X.X is version of room.
     implementation "androidx.room:room-runtime:2.0.0"
     annotationProcessor "androidx.room:room-compiler:2.0.0" // use kapt for Kotlin
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:2.0.0"
     // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:2.0.0"
+//    implementation "androidx.room:room-guava:2.0.0"
     // Test helpers
     testImplementation "androidx.room:room-testing:2.0.0"
 }
