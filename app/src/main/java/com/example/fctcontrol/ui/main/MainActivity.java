@@ -1,6 +1,7 @@
 package com.example.fctcontrol.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -42,17 +43,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerLayout() {
+        Toolbar toolbar = ActivityCompat.requireViewById(this, R.id.toolbar);
         DrawerLayout drawerLayout = ActivityCompat.requireViewById(this, R.id.drawerLayout);
+        setSupportActionBar(toolbar);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.
                 Builder(R.id.visitsExpositorFragment, R.id.studentExpositorFragment,
                 R.id.businessExpositorFragment, R.id.meetingsExpositorFragment)
                 .setDrawerLayout(drawerLayout)
                 .build();
-        setupActionBar(appBarConfiguration);
-    }
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
 
-    private void setupActionBar(AppBarConfiguration appBarConfiguration) {
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
     private void setupNavigationView() {
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
 }
