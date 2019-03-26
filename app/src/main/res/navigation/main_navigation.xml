@@ -8,12 +8,20 @@
         android:id="@+id/visitsExpositorFragment"
         android:name="com.example.fctcontrol.ui.visitas.VisitsExpositorFragment"
         android:label="Visits"
-        tools:layout="@layout/fragment_expovisitas" />
+        tools:layout="@layout/fragment_expovisitas" >
+        <action
+            android:id="@+id/action_visitsExpositorFragment_to_visitsDetailFragment"
+            app:destination="@id/visitsDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studentExpositorFragment"
         android:name="com.example.fctcontrol.ui.alumnos.StudentExpositorFragment"
         android:label="Students"
-        tools:layout="@layout/fragment_expoalumnos" />
+        tools:layout="@layout/fragment_expoalumnos" >
+        <action
+            android:id="@+id/action_studentExpositorFragment_to_detailStudentFragment"
+            app:destination="@id/detailStudentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/businessExpositorFragment"
         android:name="com.example.fctcontrol.ui.empresas.BusinessExpositorFragment"
@@ -33,4 +41,16 @@
         android:name="com.example.fctcontrol.ui.empresas.BusinessDetailFragment"
         android:label="fragment_business_detail"
         tools:layout="@layout/fragment_business_detail" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.fctcontrol.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/detailStudentFragment"
+        android:name="com.example.fctcontrol.ui.alumnos.DetailStudentFragment"
+        android:label="DetailStudentFragment" />
+    <fragment
+        android:id="@+id/visitsDetailFragment"
+        android:name="com.example.fctcontrol.ui.visitas.VisitsDetailFragment"
+        android:label="VisitsDetailFragment" />
 </navigation>

@@ -26,7 +26,7 @@
         android:id="@+id/group2"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/settingsFragment2"
+            android:id="@+id/settingsFragment"
             android:title="@string/preferences" />
     </group>
     <!-- Crea una sección con divisor y texto de cabecera y sus elementos

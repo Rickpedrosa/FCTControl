@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="time_one">5 days</string>
+    <string name="time_two">10 days</string>
+    <string name="time_three">15 days</string>
+
+    <string-array name="timeEntries">
+        <item>@string/time_one</item>
+        <item>@string/time_two</item>
+        <item>@string/time_three</item>
+    </string-array>
+
+    <string-array name="timeValues">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+
     <string name="visit_time_key">visitTimeKey</string>
     <string name="visit_time_default">15</string>
 </resources>
