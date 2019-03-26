@@ -3,4 +3,7 @@
     <string name="no_students_yet">No students added yet</string>
     <string name="no_business_yet">No enterprises added yet</string>
     <string name="no_visits_yet">No visits added yet</string>
+    <string name="preferences">Preferences</string>
+    <string name="about">About</string>
+    <string name="business_logo_descp">blp</string>
 </resources>

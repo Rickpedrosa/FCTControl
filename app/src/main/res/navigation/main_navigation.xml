@@ -8,11 +8,7 @@
         android:id="@+id/visitsExpositorFragment"
         android:name="com.example.fctcontrol.ui.visitas.VisitsExpositorFragment"
         android:label="Visits"
-        tools:layout="@layout/fragment_expovisitas" >
-        <action
-            android:id="@+id/action_visitsExpositorFragment_to_settingsFragment2"
-            app:destination="@id/settingsFragment2" />
-    </fragment>
+        tools:layout="@layout/fragment_expovisitas" />
     <fragment
         android:id="@+id/studentExpositorFragment"
         android:name="com.example.fctcontrol.ui.alumnos.StudentExpositorFragment"
@@ -22,14 +18,19 @@
         android:id="@+id/businessExpositorFragment"
         android:name="com.example.fctcontrol.ui.empresas.BusinessExpositorFragment"
         android:label="Business"
-        tools:layout="@layout/fragment_expoempresas" />
+        tools:layout="@layout/fragment_expoempresas" >
+        <action
+            android:id="@+id/action_businessExpositorFragment_to_businessDetailFragment"
+            app:destination="@id/businessDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/meetingsExpositorFragment"
         android:name="com.example.fctcontrol.ui.reuniones.MeetingsExpositorFragment"
         android:label="Meetings"
         tools:layout="@layout/fragment_reuniones" />
     <fragment
-        android:id="@+id/settingsFragment2"
-        android:name="com.example.fctcontrol.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:id="@+id/businessDetailFragment"
+        android:name="com.example.fctcontrol.ui.empresas.BusinessDetailFragment"
+        android:label="fragment_business_detail"
+        tools:layout="@layout/fragment_business_detail" />
 </navigation>

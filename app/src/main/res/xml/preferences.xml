@@ -3,12 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
+        android:defaultValue="@string/start_destiny_defaultValue"
         android:dialogTitle="@string/start_destiny_dialog_title"
         android:entries="@array/destinyArrayEntries"
         android:entryValues="@array/destinyArrayValues"
         android:icon="@drawable/ic_flag_black_24dp"
         android:key="@string/start_destiny_key"
-        android:title="@string/start_destiny_dialog_title"
-        app:useSimpleSummaryProvider="true" />
+        android:title="@string/start_destiny_dialog_title" />
+
+    <EditTextPreference
+        android:defaultValue="@string/visit_time_default"
+        android:dialogTitle="Next visit time"
+        android:inputType="number"
+        android:key="@string/visit_time_key"
+        android:title="Next visit time"
+        android:icon="@drawable/ic_access_time_black_24dp"/>
 
 </PreferenceScreen>

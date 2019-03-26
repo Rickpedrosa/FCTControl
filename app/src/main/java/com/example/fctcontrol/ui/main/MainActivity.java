@@ -2,48 +2,84 @@ package com.example.fctcontrol.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavInflater;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.fctcontrol.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        TypedArray ar = getResources().obtainTypedArray(R.array.destinyArray);
-//        int id = ar.getResourceId(0, 0);
-//        ar.recycle();
-        setupNavHost(R.id.visitsExpositorFragment);
+        //TODO REPLACE PLACEHOLDER FOR SHARED PREFERENCES LIVE DATA
+        setupNavHost(getDestinationId(""));
+        setupDrawerLayout();
+        setupNavigationView();
     }
 
     private void setupNavHost(int startDestinationId) {
-        //TODO AQUI DEBERIA RECIBIR EL int DEL SHAREDPREFERENCIESLIVEDATA
         NavHostFragment navHost =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
-        // Se obtiene el NavController del NavHostFragment
-        NavController navController = Objects.requireNonNull(navHost).getNavController();
-        // Se obtiene el inflador NavInflater del NavController
+        navController = Objects.requireNonNull(navHost).getNavController();
         NavInflater navInflater = navController.getNavInflater();
-        // Se infla el grafo de navegación
         NavGraph navGraph = navInflater.inflate(R.navigation.main_navigation);
-        // Se determina el destino inicial
-        // Se establece en el NavGraph el destino inicial
         navGraph.setStartDestination(startDestinationId);
-        // Se establece NavGraph como grafo de navegación con el que
-        // debe trabajar el NavController
         navController.setGraph(navGraph);
+    }
+
+    private void setupDrawerLayout() {
+        DrawerLayout drawerLayout = ActivityCompat.requireViewById(this, R.id.drawerLayout);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.
+                Builder(R.id.visitsExpositorFragment, R.id.studentExpositorFragment,
+                R.id.businessExpositorFragment, R.id.meetingsExpositorFragment)
+                .setDrawerLayout(drawerLayout)
+                .build();
+        setupActionBar(appBarConfiguration);
+    }
+
+    private void setupActionBar(AppBarConfiguration appBarConfiguration) {
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+    }
+
+    private void setupNavigationView() {
+        NavigationView navigationView =
+                ActivityCompat.requireViewById(this, R.id.navigationView);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private int getDestinationId(String destiny) {
+        switch (destiny) {
+            case "Visits":
+                return R.id.visitsExpositorFragment;
+            case "Students":
+                return R.id.studentExpositorFragment;
+            case "Business":
+                return R.id.businessExpositorFragment;
+            case "Meetings":
+                return R.id.meetingsExpositorFragment;
+            default:
+                return R.id.visitsExpositorFragment;
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

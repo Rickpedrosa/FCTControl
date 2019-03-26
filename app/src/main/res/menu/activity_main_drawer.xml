@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Crea una sección con divisor y sus elementos son seleccionables -->
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/visitsExpositorFragment"
+            android:icon="@drawable/ic_directions_car_black_24dp"
+            android:title="@string/pref_visit" />
+        <item
+            android:id="@+id/studentExpositorFragment"
+            android:icon="@drawable/ic_assignment_ind_black_24dp"
+            android:title="@string/pref_student" />
+        <item
+            android:id="@+id/businessExpositorFragment"
+            android:icon="@drawable/ic_card_travel_black_24dp"
+            android:title="@string/pref_business" />
+        <item
+            android:id="@+id/meetingsExpositorFragment"
+            android:icon="@drawable/ic_event_seat_black_24dp"
+            android:title="@string/pref_meeting" />
+    </group>
+    <!-- Crea una sección con divisor y sus elementos son seleccionables -->
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settingsFragment2"
+            android:title="@string/preferences" />
+    </group>
+    <!-- Crea una sección con divisor y texto de cabecera y sus elementos
+         no son seleccionables -->
+    <item android:title="@string/about">
+        <menu>
+            <item
+                android:id="@+id/aboutFragment"
+                android:title="@string/about" />
+        </menu>
+    </item>
+    <!-- Crea una sección con divisor y su elementos no es seleccionable
+         y además usa una vista personalizada -->
+    <!--<group android:id="@+id/group3">-->
+    <!--<item-->
+    <!--android:id="@+id/mnuDownloaded"-->
+    <!--app:actionLayout="@layout/action_view_switch"-->
+    <!--android:title="@string/activity_main_mnuDownloaded" />-->
+    <!--</group>-->
+</menu>
