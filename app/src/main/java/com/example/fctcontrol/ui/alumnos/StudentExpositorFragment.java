@@ -12,10 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 public class StudentExpositorFragment extends Fragment {
 
     private FragmentExpoalumnosBinding b;
+    private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,5 +35,7 @@ public class StudentExpositorFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        navController = NavHostFragment.findNavController(this);
+        b.fab.setOnClickListener(v -> navController.navigate(R.id.detailStudentFragment));
     }
 }

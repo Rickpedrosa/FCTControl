@@ -36,5 +36,6 @@ public class VisitsExpositorFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         navController = NavHostFragment.findNavController(this);
+        b.fab.setOnClickListener(v -> navController.navigate(R.id.visitsDetailFragment));
     }
 }
