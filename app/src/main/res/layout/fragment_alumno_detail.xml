@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -103,7 +103,7 @@
             android:ems="5"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:text="Select course"
             app:layout_constraintEnd_toStartOf="@+id/txt_studentCompany"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_studentCourse" />
@@ -126,6 +126,7 @@
             android:ems="10"
             android:enabled="false"
             android:inputType="textPersonName"
+            android:text="Select company"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_studentCompany" />
 
@@ -238,7 +239,7 @@
                     android:layout_weight="1"
                     android:contentDescription="xd"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_add_white_24dp" />
+                    android:src="@drawable/ic_check_black_24dp" />
 
                 <ImageView
                     android:id="@+id/delete"
@@ -247,7 +248,7 @@
                     android:layout_weight="1"
                     android:contentDescription="xd"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_add_white_24dp" />
+                    android:src="@drawable/ic_delete_black_24dp" />
 
                 <ImageView
                     android:id="@+id/dismiss"
@@ -256,7 +257,7 @@
                     android:layout_weight="1"
                     android:contentDescription="xd"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_add_white_24dp" />
+                    android:src="@drawable/ic_cancel_black_24dp" />
 
             </LinearLayout>
         </com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout>

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = ActivityCompat.requireViewById(this, R.id.toolbar);
         DrawerLayout drawerLayout = ActivityCompat.requireViewById(this, R.id.drawerLayout);
         setSupportActionBar(toolbar);
+//        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.ic_add_black_24dp);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.
                 Builder(R.id.visitsExpositorFragment, R.id.studentExpositorFragment,
                 R.id.businessExpositorFragment, R.id.meetingsExpositorFragment)
