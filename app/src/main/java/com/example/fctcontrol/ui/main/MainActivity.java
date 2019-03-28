@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavInflater;
@@ -26,8 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //TODO REPLACE PLACEHOLDER FOR SHARED PREFERENCES LIVE DATA
-        setupNavHost(getDestinationId(""));
+        //TODO ADD FACTORY WITH DATABASE INSTANCE
+        MainActivityViewModel viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        viewModel.getStartDestination().observe(this, this::setupApplication);
+    }
+
+    private void setupApplication(String id) {
+        setupNavHost(getDestinationId(id));
         setupDrawerLayout();
         setupNavigationView();
     }
@@ -46,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = ActivityCompat.requireViewById(this, R.id.toolbar);
         DrawerLayout drawerLayout = ActivityCompat.requireViewById(this, R.id.drawerLayout);
         setSupportActionBar(toolbar);
-//        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.ic_add_black_24dp);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.
                 Builder(R.id.visitsExpositorFragment, R.id.studentExpositorFragment,
-                R.id.businessExpositorFragment, R.id.meetingsExpositorFragment)
+                R.id.businessExpositorFragment)
                 .setDrawerLayout(drawerLayout)
                 .build();
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
@@ -62,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    @SuppressWarnings("SameParameterValue")
     private int getDestinationId(String destiny) {
         switch (destiny) {
             case "Visits":
@@ -71,16 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 return R.id.studentExpositorFragment;
             case "Business":
                 return R.id.businessExpositorFragment;
-            case "Meetings":
-                return R.id.meetingsExpositorFragment;
             default:
                 return R.id.visitsExpositorFragment;
         }
     }
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        onBackPressed();
-//        return true;
-//    }
 }

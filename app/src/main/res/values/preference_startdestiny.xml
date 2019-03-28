@@ -3,20 +3,17 @@
     <string name="pref_visit">Visits</string>
     <string name="pref_student">Students</string>
     <string name="pref_business">Business</string>
-    <string name="pref_meeting">Meetings</string>
 
     <string-array name="destinyArrayEntries">
         <item>@string/pref_visit</item>
         <item>@string/pref_student</item>
         <item>@string/pref_business</item>
-        <item>@string/pref_meeting</item>
     </string-array>
 
     <string-array name="destinyArrayValues">
         <item>@string/pref_visit</item>
         <item>@string/pref_student</item>
         <item>@string/pref_business</item>
-        <item>@string/pref_meeting</item>
     </string-array>
 
     <string name="start_destiny_key">startDestinyKey</string>

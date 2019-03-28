@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.databinding.FragmentBusinessDetailBinding;
 
 import java.util.Objects;
 
@@ -13,9 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 public class BusinessDetailFragment extends Fragment {
+
+    private FragmentBusinessDetailBinding b;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +29,8 @@ public class BusinessDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_business_detail, container, false);
+        b = DataBindingUtil.inflate(inflater, R.layout.fragment_business_detail, container, false);
+        return b.getRoot();
     }
 
     @Override
@@ -35,5 +40,6 @@ public class BusinessDetailFragment extends Fragment {
 //        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity()))
 //                .getSupportActionBar())
 //                .setTitle("titile");
+
     }
 }

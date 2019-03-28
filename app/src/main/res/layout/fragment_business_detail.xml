@@ -1,251 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/lbl_cif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="CIF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <EditText
-        android:id="@+id/txt_cif"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_cif" />
+    </data>
 
-    <TextView
-        android:id="@+id/lbl_businessName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_cif" />
-
-    <EditText
-        android:id="@+id/txt_businessName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_businessName" />
-
-    <TextView
-        android:id="@+id/lbl_businessAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_businessName" />
-
-    <EditText
-        android:id="@+id/txt_businessAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_businessAddress" />
-
-    <TextView
-        android:id="@+id/lbl_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_businessAddress" />
-
-    <EditText
-        android:id="@+id/txt_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/imgEmail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_email" />
-
-    <TextView
-        android:id="@+id/lbl_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_businessAddress" />
-
-    <EditText
-        android:id="@+id/txt_phone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="5"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@id/imgPhone"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_phone" />
-
-    <ImageView
-        android:id="@+id/imgEmail"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription=""
-        android:focusable="false"
-        android:src="@drawable/ic_email_black_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_email"
-        app:layout_constraintEnd_toStartOf="@+id/txt_phone"
-        app:layout_constraintTop_toTopOf="@+id/txt_email" />
-
-    <ImageView
-        android:id="@+id/imgPhone"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription=""
-        android:focusable="false"
-        android:src="@drawable/ic_local_phone_black_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txt_phone" />
-
-    <TextView
-        android:id="@+id/lbl_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="URL Logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
-
-    <EditText
-        android:id="@+id/txt_url"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_url" />
-
-    <TextView
-        android:id="@+id/lbl_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Contact"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_url" />
-
-    <EditText
-        android:id="@+id/txt_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_contact" />
-
-    <com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout
-        android:id="@+id/fabtoolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:containerId="@+id/fabtoolbar_container"
-        app:fabId="@+id/fabtoolbar_fab"
-        app:fabToolbarId="@+id/fabtoolbar_toolbar"
-        app:fadeInFraction="0.2"
-        app:hideDuration="200"
-        app:horizontalMargin="30dp"
-        app:showDuration="600"
-        app:verticalMargin="30dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/fabtoolbar_container"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/lbl_cif"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/cif"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabtoolbar_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard_black_24dp"
-                app:fabSize="normal" />
+        <EditText
+            android:id="@+id/txt_cif"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_cif"
+            tools:ignore="Autofill,LabelFor" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/lbl_businessName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_cif" />
 
-        <LinearLayout
-            android:id="@+id/fabtoolbar_toolbar"
+        <EditText
+            android:id="@+id/txt_businessName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_businessName"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:id="@+id/lbl_businessAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_businessName" />
+
+        <EditText
+            android:id="@+id/txt_businessAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_businessAddress"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:id="@+id/lbl_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_businessAddress" />
+
+        <EditText
+            android:id="@+id/txt_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toStartOf="@+id/imgEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_email"
+            tools:ignore="Autofill,LabelFor" />
+
+        <TextView
+            android:id="@+id/lbl_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_businessAddress" />
+
+        <EditText
+            android:id="@+id/txt_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:inputType="phone"
+            app:layout_constraintEnd_toStartOf="@id/imgPhone"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_phone"
+            tools:ignore="Autofill,LabelFor" />
+
+        <ImageView
+            android:id="@+id/imgEmail"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription=""
+            android:focusable="false"
+            android:src="@drawable/ic_email_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_email"
+            app:layout_constraintEnd_toStartOf="@+id/txt_phone"
+            app:layout_constraintTop_toTopOf="@+id/txt_email"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/imgPhone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription=""
+            android:focusable="false"
+            android:src="@drawable/ic_local_phone_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_phone"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/lbl_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/url_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+
+        <EditText
+            android:id="@+id/txt_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_url"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/lbl_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/contact"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_url" />
+
+        <EditText
+            android:id="@+id/txt_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_contact"
+            tools:ignore="Autofill,LabelFor" />
+
+        <com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout
+            android:id="@+id/fabtoolbar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            app:containerId="@+id/fabtoolbar_container"
+            app:fabId="@+id/fabtoolbar_fab"
+            app:fabToolbarId="@+id/fabtoolbar_toolbar"
+            app:fadeInFraction="0.2"
+            app:hideDuration="200"
+            app:horizontalMargin="30dp"
+            app:showDuration="600"
+            app:verticalMargin="30dp">
 
-            <ImageView
-                android:id="@+id/save"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="xd"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_check_black_24dp" />
+            <RelativeLayout
+                android:id="@+id/fabtoolbar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true">
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="xd"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_delete_black_24dp" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabtoolbar_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_dashboard_black_24dp"
+                    app:fabSize="normal" />
 
-            <ImageView
-                android:id="@+id/dismiss"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="xd"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_cancel_black_24dp" />
+            </RelativeLayout>
 
-        </LinearLayout>
-    </com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout>
+            <LinearLayout
+                android:id="@+id/fabtoolbar_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/save"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/xd"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_check_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/xd"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_delete_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/dismiss"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/xd"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_cancel_black_24dp" />
+
+            </LinearLayout>
+        </com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

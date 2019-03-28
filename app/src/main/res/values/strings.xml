@@ -6,4 +6,12 @@
     <string name="preferences">Preferences</string>
     <string name="about">About</string>
     <string name="business_logo_descp">blp</string>
+    <string name="cif">CIF</string>
+    <string name="xd">xd</string>
+    <string name="contact">Contact</string>
+    <string name="url_logo">URL Logo</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
 </resources>

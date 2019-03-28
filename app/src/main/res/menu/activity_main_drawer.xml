@@ -16,10 +16,6 @@
             android:id="@+id/businessExpositorFragment"
             android:icon="@drawable/ic_card_travel_black_24dp"
             android:title="@string/pref_business" />
-        <item
-            android:id="@+id/meetingsExpositorFragment"
-            android:icon="@drawable/ic_event_seat_black_24dp"
-            android:title="@string/pref_meeting" />
     </group>
     <!-- Crea una sección con divisor y sus elementos son seleccionables -->
     <group

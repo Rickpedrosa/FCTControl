@@ -32,11 +32,6 @@
             app:destination="@id/businessDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/meetingsExpositorFragment"
-        android:name="com.example.fctcontrol.ui.reuniones.MeetingsExpositorFragment"
-        android:label="Meetings"
-        tools:layout="@layout/fragment_reuniones" />
-    <fragment
         android:id="@+id/businessDetailFragment"
         android:name="com.example.fctcontrol.ui.empresas.BusinessDetailFragment"
         android:label="fragment_business_detail"
