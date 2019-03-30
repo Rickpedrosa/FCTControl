@@ -1,4 +1,4 @@
 package com.example.fctcontrol.data;
 
-public class Repo {
+public interface Repository {
 }

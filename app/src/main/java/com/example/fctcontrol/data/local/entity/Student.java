@@ -1,5 +1,6 @@
 package com.example.fctcontrol.data.local.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -10,7 +11,8 @@ import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "student",
         indices = {@Index(value = {"name"},
-                unique = true)},
+                unique = true),
+                @Index(value = {"businessId"})},
         foreignKeys = @ForeignKey(entity = Business.class,
                 parentColumns = "id",
                 childColumns = "businessId",
@@ -38,7 +40,7 @@ public class Student {
     private String tutor_schedule;
 
     public Student(long id, String name, int phone, String email,
-                   String course, String business,
+                   String course, String businessId,
                    String tutor, int tutor_phone,
                    String tutor_schedule) {
         this.id = id;
@@ -46,7 +48,7 @@ public class Student {
         this.phone = phone;
         this.email = email;
         this.course = course;
-        this.businessId = business;
+        this.businessId = businessId;
         this.tutor = tutor;
         this.tutor_phone = tutor_phone;
         this.tutor_schedule = tutor_schedule;

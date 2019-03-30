@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.data.local.AppDatabase;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //TODO ADD FACTORY WITH DATABASE INSTANCE
-        MainActivityViewModel viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        MainActivityViewModel viewModel = ViewModelProviders.of(this,
+                new MainActivityViewModelFactory(getApplication(), AppDatabase.getInstance(this))).get(MainActivityViewModel.class);
         viewModel.getStartDestination().observe(this, this::setupApplication);
     }
 

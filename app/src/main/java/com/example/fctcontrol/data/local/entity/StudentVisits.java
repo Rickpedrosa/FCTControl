@@ -3,17 +3,20 @@ package com.example.fctcontrol.data.local.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "studentVisits",
+        indices = {@Index(value = "visitId")},
         primaryKeys = {"studentId", "visitId"},
-        foreignKeys = {@ForeignKey(entity = Student.class,
-                parentColumns = "id",
-                childColumns = "studentId",
-                onUpdate = CASCADE,
-                onDelete = CASCADE
-        ),
+        foreignKeys = {
+                @ForeignKey(entity = Student.class,
+                        parentColumns = "id",
+                        childColumns = "studentId",
+                        onUpdate = CASCADE,
+                        onDelete = CASCADE
+                ),
                 @ForeignKey(entity = Visits.class,
                         parentColumns = "id",
                         childColumns = "visitId",

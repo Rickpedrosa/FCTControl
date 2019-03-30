@@ -1,5 +1,6 @@
 package com.example.fctcontrol.data.local.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -39,7 +40,7 @@ public class Business {
 
     public Business(long id, String name, String cif, String address,
                     String headquarters, int phone, String email,
-                    String logo, String contact) {
+                    String url_logo, String contact) {
         this.id = id;
         this.name = name;
         this.cif = cif;
@@ -47,7 +48,7 @@ public class Business {
         this.headquarters = headquarters;
         this.phone = phone;
         this.email = email;
-        this.url_logo = logo;
+        this.url_logo = url_logo;
         this.contact = contact;
     }
 
