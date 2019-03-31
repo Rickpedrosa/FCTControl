@@ -23,7 +23,6 @@ public class MainActivityViewModel extends AndroidViewModel {
                 PreferenceManager.getDefaultSharedPreferences(application),
                 application.getString(R.string.start_destiny_key),
                 application.getString(R.string.start_destiny_defaultValue));
-
     }
 
     public LiveData<String> getStartDestination() {

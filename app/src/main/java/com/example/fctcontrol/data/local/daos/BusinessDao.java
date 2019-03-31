@@ -16,7 +16,7 @@ import androidx.room.Update;
 public interface BusinessDao {
 
     @Query("SELECT * FROM business")
-    LiveData<List<Business>> getAllCompanys();
+    LiveData<List<Business>> getAllCompanies();
 
     @Query("SELECT * FROM business WHERE id = :businessId")
     LiveData<Business> getBusinessById(long businessId);

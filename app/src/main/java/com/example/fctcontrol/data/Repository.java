@@ -1,4 +1,56 @@
 package com.example.fctcontrol.data;
 
+import com.example.fctcontrol.data.local.entity.Business;
+import com.example.fctcontrol.data.local.entity.Student;
+import com.example.fctcontrol.data.local.entity.Visits;
+
+import java.util.List;
+
+import androidx.lifecycle.LiveData;
+
+@SuppressWarnings("DanglingJavadoc")
 public interface Repository {
+
+    /*BUSINESS DAO*/
+    LiveData<List<Business>> getAllCompanies();
+
+    LiveData<Business> getBusinessById(long businessId);
+
+    void addBusiness(Business business);
+
+    void deleteBusiness(Business business);
+
+    void updateBusiness(Business business);
+
+    /**************/
+
+    /*STUDENT DAO*/
+    LiveData<List<Student>> getAllStudents();
+
+    LiveData<Student> getStudentById(long studentId);
+
+    void addStudent(Student student);
+
+    void deleteStudent(Student student);
+
+    void updateStudent(Student student);
+
+    /*************/
+
+    /*VISITS DAO*/
+    LiveData<List<Visits>> getAllVisits();
+
+    LiveData<Visits> getVisitById(long visitId);
+
+    void addVisit(Visits visit);
+
+    void deleteVisit(Visits visit);
+
+    void updateVisit(Visits visit);
+    /****************/
+
+    /*STUDENTS-VISITS DAO*/
+    //TODO methods from dao
+    /**********************/
+
 }
