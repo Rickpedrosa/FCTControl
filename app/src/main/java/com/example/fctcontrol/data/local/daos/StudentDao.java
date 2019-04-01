@@ -2,6 +2,7 @@ package com.example.fctcontrol.data.local.daos;
 
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
+import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ import androidx.room.Update;
 @Dao
 public interface StudentDao {
 
-    @Query("SELECT * FROM student")
-    LiveData<List<Student>> getAllStudents();
+    @Query("SELECT st.id, st.course, st.email, b.name AS business, st.name" +
+            " FROM student st INNER JOIN business b ON st.businessId = b.id")
+    LiveData<List<StudentResume>> getAllStudents();
 
     @Query("SELECT * FROM student WHERE id = :studentId")
     LiveData<Student> getStudentById(long studentId);

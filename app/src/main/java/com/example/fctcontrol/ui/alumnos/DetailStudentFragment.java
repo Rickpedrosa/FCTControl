@@ -1,6 +1,7 @@
 package com.example.fctcontrol.ui.alumnos;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,6 @@ public class DetailStudentFragment extends Fragment {
             b.fabtoolbar.hide();
         });
         b.dismiss.setOnClickListener(v -> b.fabtoolbar.hide());
-        b.dummy.setOnClickListener(v -> hideFabToolbar());
     }
 
     private void hideFabToolbar() {
@@ -57,6 +57,7 @@ public class DetailStudentFragment extends Fragment {
     }
 
     private void focusHandlingOfEditTexts() {
+        b.dummy.setOnClickListener(v -> hideFabToolbar());
         b.txtStudentEmail.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 hideFabToolbar();

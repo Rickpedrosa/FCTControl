@@ -9,6 +9,8 @@ import com.example.fctcontrol.data.local.daos.VisitsDao;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
+import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public LiveData<List<Business>> getAllCompanies() {
+    public LiveData<List<BusinessResume>> getAllCompanies() {
         return businessDao.getAllCompanies();
     }
 
@@ -59,7 +61,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public LiveData<List<Student>> getAllStudents() {
+    public LiveData<List<StudentResume>> getAllStudents() {
         return studentDao.getAllStudents();
     }
 

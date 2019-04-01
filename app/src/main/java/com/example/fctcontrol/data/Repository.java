@@ -3,6 +3,8 @@ package com.example.fctcontrol.data;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
+import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ import androidx.lifecycle.LiveData;
 public interface Repository {
 
     /*BUSINESS DAO*/
-    LiveData<List<Business>> getAllCompanies();
+    LiveData<List<BusinessResume>> getAllCompanies();
 
     LiveData<Business> getBusinessById(long businessId);
 
@@ -25,7 +27,7 @@ public interface Repository {
     /**************/
 
     /*STUDENT DAO*/
-    LiveData<List<Student>> getAllStudents();
+    LiveData<List<StudentResume>> getAllStudents();
 
     LiveData<Student> getStudentById(long studentId);
 

@@ -1,6 +1,7 @@
 package com.example.fctcontrol.data.local.daos;
 
 import com.example.fctcontrol.data.local.entity.Business;
+import com.example.fctcontrol.dto.BusinessResume;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ import androidx.room.Update;
 @Dao
 public interface BusinessDao {
 
-    @Query("SELECT * FROM business")
-    LiveData<List<Business>> getAllCompanies();
+    @Query("SELECT id, logo, phone, name FROM business")
+    LiveData<List<BusinessResume>> getAllCompanies();
 
     @Query("SELECT * FROM business WHERE id = :businessId")
     LiveData<Business> getBusinessById(long businessId);
