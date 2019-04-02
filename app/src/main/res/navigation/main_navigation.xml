@@ -34,12 +34,11 @@
     <fragment
         android:id="@+id/businessDetailFragment"
         android:name="com.example.fctcontrol.ui.empresas.BusinessDetailFragment"
-        android:label="fragment_business_detail"
-        tools:layout="@layout/fragment_business_detail" >
+        tools:layout="@layout/fragment_business_detail">
         <argument
             android:name="business_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

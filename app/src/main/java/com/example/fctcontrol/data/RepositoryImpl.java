@@ -41,6 +41,11 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public LiveData<Integer> getCompaniesCount() {
+        return businessDao.getCompaniesCount();
+    }
+
+    @Override
     public LiveData<Business> getBusinessById(long businessId) {
         return businessDao.getBusinessById(businessId);
     }

@@ -54,8 +54,8 @@ public class BusinessExpositorFragment extends Fragment {
 
     private void observeCompanies() {
         viewModel.getAllCompanies().observe(this, businessResumes -> {
-            b.lblEmptyView.setVisibility(businessResumes.isEmpty() ? View.VISIBLE : View.INVISIBLE);
             listAdapter.submitList(businessResumes);
+            b.lblEmptyView.setVisibility(businessResumes.isEmpty() ? View.VISIBLE : View.INVISIBLE);
         });
     }
 

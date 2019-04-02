@@ -16,6 +16,8 @@ public interface Repository {
     /*BUSINESS DAO*/
     LiveData<List<BusinessResume>> getAllCompanies();
 
+    LiveData<Integer> getCompaniesCount();
+
     LiveData<Business> getBusinessById(long businessId);
 
     void addBusiness(Business business);

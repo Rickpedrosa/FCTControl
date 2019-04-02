@@ -1,14 +1,13 @@
 package com.example.fctcontrol.ui.empresas;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.base.BaseRecyclerViewAdapter;
-import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.databinding.ItemEmpresaBinding;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -51,6 +50,11 @@ public class BusinessExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Bu
         }
 
         public void bind(BusinessResume item) {
+            Picasso.with(itemView.getContext()).load(item.getUrl_logo())
+                    .noFade()
+                    .placeholder(R.drawable.ic_event_seat_black_24dp)
+                    .error(R.drawable.ic_delete_black_24dp)
+                    .into(b.empresaImg);
             b.lblBusinessName.setText(item.getName());
             b.lblBusinessPhone.setText(String.valueOf(item.getPhone()));
         }

@@ -19,6 +19,9 @@ public interface BusinessDao {
     @Query("SELECT id, logo, phone, name FROM business")
     LiveData<List<BusinessResume>> getAllCompanies();
 
+    @Query("SELECT COUNT(id) FROM business")
+    LiveData<Integer> getCompaniesCount();
+
     @Query("SELECT * FROM business WHERE id = :businessId")
     LiveData<Business> getBusinessById(long businessId);
 
