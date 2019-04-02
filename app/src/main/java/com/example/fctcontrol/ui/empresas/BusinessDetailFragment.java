@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.base.CustomTextWatcher;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.databinding.FragmentBusinessDetailBinding;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
+import com.example.fctcontrol.utils.EditTextUtils;
 import com.example.fctcontrol.utils.ValidationUtils;
 
 import java.util.Objects;
@@ -51,6 +53,7 @@ public class BusinessDetailFragment extends Fragment {
                         AppDatabase.getInstance(requireContext()))).get(MainActivityViewModel.class);
         observeCompany();
         setupFabToolbar();
+        setupEditTexts();
     }
 
     private void observeCompany() {
@@ -127,9 +130,97 @@ public class BusinessDetailFragment extends Fragment {
                         b.txtCif.getText().toString(),
                         b.txtBusinessAddress.getText().toString(),
                         b.txtBusinessAddress.getText().toString(),
-                        Integer.valueOf(b.txtPhone.getText().toString()),
+                        TextUtils.isEmpty(b.txtPhone.getText().toString()) ? 0 : Integer.valueOf(b.txtPhone.getText().toString()),
                         b.txtEmail.getText().toString(),
                         b.txtUrl.getText().toString(),
                         b.txtContact.getText().toString());
+    }
+
+    private void setupEditTexts() {
+        editTextFocusHandling();
+        editTextContentHandling();
+        editTextClickHandling();
+    }
+
+    private void editTextFocusHandling() {
+        b.txtBusinessName.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblBusinessName));
+        b.txtCif.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblCif));
+        b.txtBusinessAddress.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblBusinessAddress));
+        b.txtPhone.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblPhone));
+        b.txtEmail.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblEmail));
+        b.txtUrl.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblUrl));
+        b.txtContact.setOnFocusChangeListener((v, hasFocus) ->
+                EditTextUtils.changeFontOnFocus(hasFocus, b.lblContact));
+    }
+
+    private void editTextContentHandling() {
+        b.txtBusinessName.addTextChangedListener((CustomTextWatcher.onAfterText) s -> {
+            if (TextUtils.isEmpty(b.txtBusinessName.getText().toString())) {
+                b.txtBusinessName.setError(getString(R.string.invalid_data));
+                b.lblBusinessName.setEnabled(false);
+            } else {
+                b.lblBusinessName.setEnabled(true);
+            }
+        });
+
+        b.txtEmail.addTextChangedListener((CustomTextWatcher.onTextChanged)
+                (s, start, before, count) ->
+                        EditTextUtils.validateFields(
+                                b.lblEmail,
+                                b.txtEmail,
+                                ValidationUtils.isValidEmail(b.txtEmail.getText().toString()),
+                                requireContext()));
+
+        b.txtPhone.addTextChangedListener((CustomTextWatcher.onTextChanged)
+                (s, start, before, count) ->
+                        EditTextUtils.validateFields(
+                                b.lblPhone,
+                                b.txtPhone,
+                                ValidationUtils.isValidPhone(b.txtPhone.getText().toString()),
+                                requireContext()));
+
+        b.txtBusinessAddress.addTextChangedListener((CustomTextWatcher.onAfterText) s ->
+                EditTextUtils.validateFields(
+                        b.lblBusinessAddress,
+                        b.txtBusinessAddress,
+                        !TextUtils.isEmpty(b.txtBusinessAddress.getText().toString()),
+                        requireContext()));
+
+        b.txtUrl.addTextChangedListener((CustomTextWatcher.onTextChanged) (s, start, before, count) ->
+                EditTextUtils.validateFields(
+                        b.lblUrl,
+                        b.txtUrl,
+                        ValidationUtils.isValidUrl(b.txtUrl.getText().toString()),
+                        requireContext()));
+
+        b.txtCif.addTextChangedListener((CustomTextWatcher.onTextChanged) (s, start, before, count) ->
+                EditTextUtils.validateFields(
+                        b.lblCif,
+                        b.txtCif,
+                        ValidationUtils.isValidCif(b.txtCif.getText().toString()),
+                        requireContext()));
+
+        b.txtContact.addTextChangedListener((CustomTextWatcher.onTextChanged) (s, start, before, count) ->
+                EditTextUtils.validateFields(
+                        b.lblContact,
+                        b.txtContact,
+                        !TextUtils.isEmpty(b.txtContact.getText().toString()),
+                        requireContext()));
+    }
+
+    private void editTextClickHandling() {
+        b.txtContact.setOnClickListener(v -> hideFabToolbar());
+        b.txtCif.setOnClickListener(v -> hideFabToolbar());
+        b.txtEmail.setOnClickListener(v -> hideFabToolbar());
+        b.txtPhone.setOnClickListener(v -> hideFabToolbar());
+        b.txtBusinessAddress.setOnClickListener(v -> hideFabToolbar());
+        b.txtBusinessName.setOnClickListener(v -> hideFabToolbar());
+        b.txtUrl.setOnClickListener(v -> hideFabToolbar());
     }
 }

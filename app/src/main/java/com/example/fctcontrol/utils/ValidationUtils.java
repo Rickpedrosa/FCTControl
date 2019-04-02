@@ -3,7 +3,13 @@ package com.example.fctcontrol.utils;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import java.util.regex.Pattern;
+
 public class ValidationUtils {
+
+    //TODO CIF pattern
+
+    private static final Pattern CIF = Pattern.compile("");
 
     private ValidationUtils() {
     }
