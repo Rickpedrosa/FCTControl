@@ -45,14 +45,14 @@ public class BusinessExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Bu
             b = itemView;
             itemView.getRoot().setOnClickListener(v -> navController.navigate(
                     BusinessExpositorFragmentDirections.
-                    actionBusinessExpositorFragmentToBusinessDetailFragment().
-                    setBusinessId(getItem(getAdapterPosition()).getId())));
+                            actionBusinessExpositorFragmentToBusinessDetailFragment().
+                            setBusinessId(getItem(getAdapterPosition()).getId())));
         }
 
         public void bind(BusinessResume item) {
             Picasso.with(itemView.getContext()).load(item.getUrl_logo())
                     .noFade()
-                    .placeholder(R.drawable.ic_event_seat_black_24dp)
+//                    .placeholder(R.drawable.ic_event_seat_black_24dp)
                     .error(R.drawable.ic_delete_black_24dp)
                     .into(b.empresaImg);
             b.lblBusinessName.setText(item.getName());
