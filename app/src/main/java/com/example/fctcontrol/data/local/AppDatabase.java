@@ -11,9 +11,12 @@ import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.StudentVisits;
 import com.example.fctcontrol.data.local.entity.Visits;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities =
         {Student.class,
@@ -24,6 +27,13 @@ import androidx.room.RoomDatabase;
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "fct_rick_pedrosa";
+    //UN CAMPO INTEGER PRIMARY KEY SIEMPRE SERÁ AUTO_INCREMENT DE FORMA IMPLÍCITA LOL
+//    private static final Migration MIGRATION_1_TO_2 = new Migration(1, 2) {
+//        @Override
+//        public void migrate(@NonNull SupportSQLiteDatabase database) {
+//
+//        }
+//    };
 
     private static volatile AppDatabase instance;
 
@@ -34,7 +44,9 @@ public abstract class AppDatabase extends RoomDatabase {
                     instance =
                             Room.databaseBuilder(
                                     context.getApplicationContext(), AppDatabase.class,
-                                    DATABASE_NAME).build();
+                                    DATABASE_NAME)
+                                    //.addMigrations(MIGRATION_1_TO_2)
+                                    .build();
                 }
             }
         }

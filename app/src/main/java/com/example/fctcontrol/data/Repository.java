@@ -4,6 +4,7 @@ import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface Repository {
     /*STUDENT DAO*/
     LiveData<List<StudentResume>> getAllStudents();
 
-    LiveData<Student> getStudentById(long studentId);
+    LiveData<StudentDetail> getStudentById(long studentId);
 
     void addStudent(Student student);
 

@@ -8,7 +8,10 @@ import com.example.fctcontrol.data.Repository;
 import com.example.fctcontrol.data.RepositoryImpl;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.data.local.entity.Business;
+import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.StudentDetail;
+import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
 
@@ -57,4 +60,26 @@ public class MainActivityViewModel extends AndroidViewModel {
         return repo.getBusinessById(id);
     }
     /*END OF BUSINESS FRAGMENTS*/
+
+    /*STUDENT FRAGMENTS*/
+    public LiveData<List<StudentResume>> getAllStudents() {
+        return repo.getAllStudents();
+    }
+
+    public void addStudent(Student student) {
+        repo.addStudent(student);
+    }
+
+    public void updateStudent(Student student) {
+        repo.updateStudent(student);
+    }
+
+    public void deleteStudent(Student student) {
+        repo.deleteStudent(student);
+    }
+
+    public LiveData<StudentDetail> getStudent(long id) {
+        return repo.getStudentById(id);
+    }
+    /*END OF STUDENT FRAGMENTS*/
 }

@@ -1,24 +1,26 @@
 package com.example.fctcontrol.ui.alumnos;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.base.BaseRecyclerViewAdapter;
-import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.databinding.ItemAlumnoBinding;
 import com.example.fctcontrol.dto.StudentResume;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class StudentExpositorFragmentAdapter extends BaseRecyclerViewAdapter<StudentResume,
         StudentExpositorFragmentAdapter.ViewHolder> {
 
-    public StudentExpositorFragmentAdapter() {
+    private final NavController navController;
+
+    StudentExpositorFragmentAdapter(NavController navController) {
+        this.navController = navController;
+        setHasStableIds(true);
     }
 
     @NonNull
@@ -40,6 +42,10 @@ public class StudentExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Stu
         ViewHolder(@NonNull ItemAlumnoBinding itemView) {
             super(itemView.getRoot());
             b = itemView;
+            itemView.getRoot().setOnClickListener(v -> navController.navigate(
+                    StudentExpositorFragmentDirections.
+                            actionStudentExpositorFragmentToDetailStudentFragment().
+                            setStudentId(getItem(getAdapterPosition()).getId())));
         }
 
         void bind(StudentResume item) {

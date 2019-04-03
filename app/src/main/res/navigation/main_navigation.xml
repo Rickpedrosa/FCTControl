@@ -47,7 +47,12 @@
     <fragment
         android:id="@+id/detailStudentFragment"
         android:name="com.example.fctcontrol.ui.alumnos.DetailStudentFragment"
-        android:label="DetailStudentFragment" />
+        android:label="DetailStudentFragment" >
+        <argument
+            android:name="studentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
     <fragment
         android:id="@+id/visitsDetailFragment"
         android:name="com.example.fctcontrol.ui.visitas.VisitsDetailFragment"

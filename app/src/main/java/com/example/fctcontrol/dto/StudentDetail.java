@@ -1,25 +1,9 @@
-package com.example.fctcontrol.data.local.entity;
+package com.example.fctcontrol.dto;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(tableName = "student",
-        indices = {@Index(value = {"name"},
-                unique = true),
-                @Index(value = {"businessId"})},
-        foreignKeys = @ForeignKey(entity = Business.class,
-                parentColumns = "id",
-                childColumns = "businessId",
-                onDelete = CASCADE,
-                onUpdate = CASCADE))
-public class Student {
-
-    @PrimaryKey(autoGenerate = true)
+public class StudentDetail {
+    @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "name")
     private String name;
@@ -29,8 +13,8 @@ public class Student {
     private String email;
     @ColumnInfo(name = "course")
     private String course;
-    @ColumnInfo(name = "businessId")
-    private long businessId;
+    @ColumnInfo(name = "businessName")
+    private String businessName;
     @ColumnInfo(name = "tutor")
     private String tutor;
     @ColumnInfo(name = "tutor_phone")
@@ -38,16 +22,15 @@ public class Student {
     @ColumnInfo(name = "tutor_schedule")
     private String tutor_schedule;
 
-    public Student(long id, String name, int phone, String email,
-                   String course, long businessId,
-                   String tutor, int tutor_phone,
-                   String tutor_schedule) {
+    public StudentDetail(long id, String name, int phone, String email,
+                         String course, String businessName, String tutor,
+                         int tutor_phone, String tutor_schedule) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.course = course;
-        this.businessId = businessId;
+        this.businessName = businessName;
         this.tutor = tutor;
         this.tutor_phone = tutor_phone;
         this.tutor_schedule = tutor_schedule;
@@ -93,12 +76,12 @@ public class Student {
         this.course = course;
     }
 
-    public long getBusinessId() {
-        return businessId;
+    public String getBusinessName() {
+        return businessName;
     }
 
-    public void setBusinessId(long businessId) {
-        this.businessId = businessId;
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
     public String getTutor() {

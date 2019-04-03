@@ -10,6 +10,7 @@ import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
 
 import java.util.List;
@@ -71,7 +72,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public LiveData<Student> getStudentById(long studentId) {
+    public LiveData<StudentDetail> getStudentById(long studentId) {
         return studentDao.getStudentById(studentId);
     }
 
