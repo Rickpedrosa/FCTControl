@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.data.local.AppDatabase;
-import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.databinding.FragmentExpoempresasBinding;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
@@ -54,8 +53,8 @@ public class BusinessExpositorFragment extends Fragment {
 
     private void observeCompanies() {
         viewModel.getAllCompanies().observe(this, businessResumes -> {
+            b.lblEmptyView.setVisibility(businessResumes.size() == 0 ? View.VISIBLE : View.INVISIBLE);
             listAdapter.submitList(businessResumes);
-            b.lblEmptyView.setVisibility(businessResumes.isEmpty() ? View.VISIBLE : View.INVISIBLE);
         });
     }
 

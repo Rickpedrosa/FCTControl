@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import com.example.fctcontrol.R;
@@ -15,7 +16,9 @@ import com.example.fctcontrol.databinding.FragmentBusinessDetailBinding;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
 import com.example.fctcontrol.utils.EditTextUtils;
+import com.example.fctcontrol.utils.KeyboardUtils;
 import com.example.fctcontrol.utils.ValidationUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -25,12 +28,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 public class BusinessDetailFragment extends Fragment {
 
     private FragmentBusinessDetailBinding b;
     private MainActivityViewModel viewModel;
     private long businessId;
+    private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +57,7 @@ public class BusinessDetailFragment extends Fragment {
         viewModel = ViewModelProviders.of(requireActivity(),
                 new MainActivityViewModelFactory(requireActivity().getApplication(),
                         AppDatabase.getInstance(requireContext()))).get(MainActivityViewModel.class);
+        navController = NavHostFragment.findNavController(this);
         observeCompany();
         setupFabToolbar();
         setupEditTexts();
@@ -91,30 +98,38 @@ public class BusinessDetailFragment extends Fragment {
         if (grantPermissionToExecuteQuery()) {
             if (businessId > 0) {
                 viewModel.updateCompany(bus);
-                Toast.makeText(requireContext(), "Company updated!", Toast.LENGTH_SHORT).show();
+                Snackbar.make(b.lblBusinessName,
+                        requireContext().getString(R.string.company_update, b.txtBusinessName.getText().toString()),
+                        Snackbar.LENGTH_LONG).show();
+                navController.popBackStack();
             } else {
                 viewModel.addCompany(bus);
-                Toast.makeText(requireContext(), "Company added!", Toast.LENGTH_SHORT).show();
+                Snackbar.make(b.lblBusinessName,
+                        requireContext().getString(R.string.company_add, b.txtBusinessName.getText().toString()),
+                        Snackbar.LENGTH_LONG).show();
+                navController.popBackStack();
             }
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.error_field), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void setupFabToolbar() {
         b.fabtoolbarFab.setOnClickListener(v -> b.fabtoolbar.show());
-        b.save.setOnClickListener(v -> {
-            save(getCurrentBusiness());
-            //requireActivity().onBackPressed();
+        b.save.setOnClickListener(v -> save(getCurrentBusiness()));
+        b.delete.setOnClickListener(v -> {
+            if (businessId > 0) {
+                deleteCompany();
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.error_no_delete), Toast.LENGTH_SHORT).show();
+            }
         });
-        if (businessId > 0) {
-            b.delete.setOnClickListener(v -> {
-                viewModel.deleteCompany(getCurrentBusiness());
-                //Toast.makeText(requireContext(), "Company deleted!", Toast.LENGTH_SHORT).show();
-                requireActivity().onBackPressed();
-            });
-        } else {
-            b.delete.setEnabled(false);
-        }
         b.dismiss.setOnClickListener(v -> b.fabtoolbar.hide());
+    }
+
+    private void deleteCompany() {
+        viewModel.deleteCompany(getCurrentBusiness());
+        navController.popBackStack();
     }
 
     private void hideFabToolbar() {
@@ -140,6 +155,14 @@ public class BusinessDetailFragment extends Fragment {
         editTextFocusHandling();
         editTextContentHandling();
         editTextClickHandling();
+        b.txtContact.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                KeyboardUtils.hideSoftKeyboard(requireActivity());
+                save(getCurrentBusiness());
+                return true;
+            }
+            return false;
+        });
     }
 
     private void editTextFocusHandling() {
@@ -160,14 +183,12 @@ public class BusinessDetailFragment extends Fragment {
     }
 
     private void editTextContentHandling() {
-        b.txtBusinessName.addTextChangedListener((CustomTextWatcher.onAfterText) s -> {
-            if (TextUtils.isEmpty(b.txtBusinessName.getText().toString())) {
-                b.txtBusinessName.setError(getString(R.string.invalid_data));
-                b.lblBusinessName.setEnabled(false);
-            } else {
-                b.lblBusinessName.setEnabled(true);
-            }
-        });
+        b.txtBusinessName.addTextChangedListener((CustomTextWatcher.onAfterText) s ->
+                EditTextUtils.validateFields(
+                        b.lblBusinessName,
+                        b.txtBusinessName,
+                        !TextUtils.isEmpty(b.txtBusinessName.getText().toString()),
+                        requireContext()));
 
         b.txtEmail.addTextChangedListener((CustomTextWatcher.onTextChanged)
                 (s, start, before, count) ->

@@ -28,6 +28,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
+            android:imeOptions="actionNext"
+
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +53,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
+
+            android:imeOptions="actionNext"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+
             android:ems="10"
+            android:imeOptions="actionNext"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +99,11 @@
         <EditText
             android:id="@+id/txt_email"
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:ems="10"
+            android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toStartOf="@+id/imgEmail"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +125,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="5"
+            android:imeOptions="actionNext"
             android:inputType="phone"
             app:layout_constraintEnd_toStartOf="@id/imgPhone"
             app:layout_constraintTop_toBottomOf="@+id/lbl_phone"
@@ -169,6 +178,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
+            android:imeOptions="actionNext"
+
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +202,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:ems="10"
+            android:imeOptions="actionDone"
+
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_contact"

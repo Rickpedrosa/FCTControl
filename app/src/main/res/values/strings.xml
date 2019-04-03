@@ -15,4 +15,8 @@
     <string name="name">Name</string>
     <string name="address">Address</string>
     <string name="invalid_data">Invalid data</string>
+    <string name="company_update">%1$s company updated!</string>
+    <string name="company_add">%1$s company added!</string>
+    <string name="error_field">Some field\'s wrong</string>
+    <string name="error_no_delete">You are in add option. There is nothing to delete</string>
 </resources>
