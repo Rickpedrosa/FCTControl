@@ -3,6 +3,7 @@ package com.example.fctcontrol.data;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
+import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
@@ -18,6 +19,8 @@ public interface Repository {
     LiveData<List<BusinessResume>> getAllCompanies();
 
     LiveData<Integer> getCompaniesCount();
+
+    LiveData<BusinessForDialog[]> getBusinessForDialog();
 
     LiveData<Business> getBusinessById(long businessId);
 

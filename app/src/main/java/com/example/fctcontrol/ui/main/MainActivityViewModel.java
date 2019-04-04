@@ -9,6 +9,7 @@ import com.example.fctcontrol.data.RepositoryImpl;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
+import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
@@ -24,6 +25,8 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private final LiveData<String> startDestination;
     private final Repository repo;
+    private String studentCourse;
+    private String studentCompany;
 
     MainActivityViewModel(@NonNull Application application, AppDatabase database) {
         super(application);
@@ -80,6 +83,26 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<StudentDetail> getStudent(long id) {
         return repo.getStudentById(id);
+    }
+
+    public LiveData<BusinessForDialog[]> getBusinessForDialog() {
+        return repo.getBusinessForDialog();
+    }
+
+    public String getStudentCourse() {
+        return studentCourse;
+    }
+
+    public void setStudentCourse(String studentCourse) {
+        this.studentCourse = studentCourse;
+    }
+
+    public String getStudentCompany() {
+        return studentCompany;
+    }
+
+    public void setStudentCompany(String studentCompany) {
+        this.studentCompany = studentCompany;
     }
     /*END OF STUDENT FRAGMENTS*/
 }

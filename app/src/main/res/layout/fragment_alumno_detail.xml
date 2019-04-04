@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lbl_studentPhone" />
 
         <Button
-            android:id="@+id/lbl_studentCourse"
+            android:id="@+id/btn_studentCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_studentEmail" />
 
         <EditText
-            android:id="@+id/txt_studentCourse"
+            android:id="@+id/lbl_studentCourse"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -104,22 +104,22 @@
             android:enabled="false"
             android:inputType="textPersonName"
             android:text="Select course"
-            app:layout_constraintEnd_toStartOf="@+id/txt_studentCompany"
+            app:layout_constraintEnd_toStartOf="@+id/lbl_studentCompany"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_studentCourse" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_studentCourse" />
 
         <Button
-            android:id="@+id/lbl_studentCompany"
+            android:id="@+id/btn_studentCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Company"
-            app:layout_constraintStart_toEndOf="@+id/txt_studentCourse"
+            app:layout_constraintStart_toEndOf="@+id/lbl_studentCourse"
             app:layout_constraintTop_toBottomOf="@+id/txt_studentPhone" />
 
         <EditText
-            android:id="@+id/txt_studentCompany"
+            android:id="@+id/lbl_studentCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -128,7 +128,7 @@
             android:inputType="textPersonName"
             android:text="Select company"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_studentCompany" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_studentCompany" />
 
         <TextView
             android:id="@+id/lbl_tutorName"
@@ -138,7 +138,7 @@
             android:layout_marginTop="8dp"
             android:text="Tutor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_studentCourse" />
+            app:layout_constraintTop_toBottomOf="@+id/lbl_studentCourse" />
 
         <EditText
             android:id="@+id/txt_tutorName"

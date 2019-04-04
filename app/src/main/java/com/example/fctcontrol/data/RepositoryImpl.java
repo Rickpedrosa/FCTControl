@@ -9,6 +9,7 @@ import com.example.fctcontrol.data.local.daos.VisitsDao;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
+import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
@@ -44,6 +45,11 @@ public class RepositoryImpl implements Repository {
     @Override
     public LiveData<Integer> getCompaniesCount() {
         return businessDao.getCompaniesCount();
+    }
+
+    @Override
+    public LiveData<BusinessForDialog[]> getBusinessForDialog() {
+        return businessDao.getBusinessForDialog();
     }
 
     @Override

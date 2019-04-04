@@ -16,6 +16,10 @@ public class SimpleSelectionDialogFragment extends DialogFragment {
     private static final String ARG_CONFIRM_TEXT = "ARG_CONFIRM_TEXT";
     private static final String ARG_DEFAULT_SELECTED_INDEX = "ARG_DEFAULT_SELECTED_INDEX";
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
     @SuppressWarnings({"UnusedParameters", "EmptyMethod"})
     public interface Listener {
         void onConfirmSelection(DialogInterface dialog, int which);
@@ -74,19 +78,5 @@ public class SimpleSelectionDialogFragment extends DialogFragment {
         return b.create();
     }
 
-    @Override
-    public void onAttach(@NonNull Context activity) {
-        super.onAttach(activity);
-        try {
-            if (getTargetFragment() != null) {
-                listener = (Listener) getTargetFragment();
-            } else {
-                listener = (Listener) activity;
-            }
-        } catch (ClassCastException e) {
-            throw new ClassCastException(
-                    "Listener must implement SimpleSelectionDialogFragment.Listener");
-        }
-    }
 
 }
