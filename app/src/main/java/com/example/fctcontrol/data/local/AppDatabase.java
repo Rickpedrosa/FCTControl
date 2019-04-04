@@ -11,12 +11,9 @@ import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.StudentVisits;
 import com.example.fctcontrol.data.local.entity.Visits;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities =
         {Student.class,
