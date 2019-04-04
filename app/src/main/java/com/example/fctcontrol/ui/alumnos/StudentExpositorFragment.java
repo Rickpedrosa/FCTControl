@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.Toast;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.data.local.AppDatabase;
@@ -19,6 +21,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class StudentExpositorFragment extends Fragment {
 
@@ -54,7 +59,9 @@ public class StudentExpositorFragment extends Fragment {
     private void setupRecyclerView() {
         listAdapter = new StudentExpositorFragmentAdapter(navController);
         b.listStudents.setHasFixedSize(true);
+        b.listStudents.setLayoutManager(new GridLayoutManager(requireContext(), 1));
         b.listStudents.setItemAnimator(new DefaultItemAnimator());
+        b.listStudents.addItemDecoration(new DividerItemDecoration(requireContext(), GridLayout.VERTICAL));
         b.listStudents.setAdapter(listAdapter);
     }
 
@@ -66,7 +73,17 @@ public class StudentExpositorFragment extends Fragment {
     }
 
     private void navigateToAddNewStudent() {
-        b.fab.setOnClickListener(v -> navController.navigate(R.id.detailStudentFragment));
-        b.lblEmptyView.setOnClickListener(v -> navController.navigate(R.id.detailStudentFragment));
+        viewModel.getCompaniesCount().observe(this, integer -> {
+            b.fab.setOnClickListener(v -> letsNavigate(integer));
+            b.lblEmptyView.setOnClickListener(v -> letsNavigate(integer));
+        });
+    }
+
+    private void letsNavigate(Integer integer) {
+        if (integer > 0) {
+            navController.navigate(R.id.detailStudentFragment);
+        } else {
+            Toast.makeText(requireContext(), "Not able to add student, no companies yet", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -27,6 +27,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private final Repository repo;
     private String studentCourse;
     private String studentCompany;
+    private long studentBusinessId;
 
     MainActivityViewModel(@NonNull Application application, AppDatabase database) {
         super(application);
@@ -103,6 +104,18 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void setStudentCompany(String studentCompany) {
         this.studentCompany = studentCompany;
+    }
+
+    public long getStudentBusinessId() {
+        return studentBusinessId;
+    }
+
+    public void setStudentBusinessId(long studentBusinessId) {
+        this.studentBusinessId = studentBusinessId;
+    }
+
+    public LiveData<Integer> getCompaniesCount() {
+        return repo.getCompaniesCount();
     }
     /*END OF STUDENT FRAGMENTS*/
 }

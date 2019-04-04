@@ -1,7 +1,6 @@
 package com.example.fctcontrol.base;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;

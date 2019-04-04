@@ -1,22 +1,28 @@
 package com.example.fctcontrol.ui.alumnos;
 
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.base.CustomTextWatcher;
 import com.example.fctcontrol.base.SimpleSelectionDialogFragment;
 import com.example.fctcontrol.data.local.AppDatabase;
+import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.databinding.FragmentAlumnoDetailBinding;
 import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
+import com.example.fctcontrol.utils.EditTextUtils;
 import com.example.fctcontrol.utils.ValidationUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -51,15 +57,23 @@ public class DetailStudentFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(requireActivity(),
-                new MainActivityViewModelFactory(requireActivity().getApplication(),
-                        AppDatabase.getInstance(requireContext()))).get(MainActivityViewModel.class);
-        navController = NavHostFragment.findNavController(this);
+        setupMainComponents();
         obtainArguments();
         observeStudent();
         setupFabToolbar();
         setupEditTexts();
         setupDialogs();
+    }
+
+    private void setupMainComponents() {
+        viewModel = ViewModelProviders.of(requireActivity(),
+                new MainActivityViewModelFactory(requireActivity().getApplication(),
+                        AppDatabase.getInstance(requireContext()))).get(MainActivityViewModel.class);
+        navController = NavHostFragment.findNavController(this);
+    }
+
+    private void obtainArguments() {
+        studentId = DetailStudentFragmentArgs.fromBundle(Objects.requireNonNull(getArguments())).getStudentId();
     }
 
     private void setupDialogs() {
@@ -74,23 +88,38 @@ public class DetailStudentFragment extends Fragment {
                 }));
     }
 
+    private void setResultFromDialog(EditText txt, DialogInterface dialog, int which, String[] businessNames) {
+        if (txt.getId() == b.lblStudentCourse.getId()) {
+            viewModel.setStudentCourse(getResources().getStringArray(R.array.courseValues)[which]);
+            Toast.makeText(requireContext(),
+                    getResources().getStringArray(R.array.courseValues)[which],
+                    Toast.LENGTH_SHORT).show();
+            b.lblStudentCourse.setText(viewModel.getStudentCourse());
+            b.lblStudentCourse.setTypeface(Typeface.DEFAULT_BOLD);
+            dialog.dismiss();
+        } else {
+            viewModel.setStudentCompany(businessNames[which]);
+            Toast.makeText(requireContext(),
+                    viewModel.getStudentCompany(),
+                    Toast.LENGTH_SHORT).show();
+            b.lblStudentCompany.setText(viewModel.getStudentCompany());
+            b.lblStudentCompany.setTypeface(Typeface.DEFAULT_BOLD);
+            dialog.dismiss();
+        }
+    }
+
     private void showSelectionDialogCourse() {
         SimpleSelectionDialogFragment dialog = SimpleSelectionDialogFragment.newInstance("Title",
-                getResources().getStringArray(R.array.courseValues),
-                "Ok", 0);
+                getResources().getStringArray(R.array.courseValues), "Ok", 0);
         dialog.setListener(new SimpleSelectionDialogFragment.Listener() {
             @Override
             public void onConfirmSelection(DialogInterface dialog, int which) {
-                viewModel.setStudentCourse(getResources().getStringArray(R.array.courseValues)[which]);
-                Toast.makeText(requireContext(),
-                        getResources().getStringArray(R.array.courseValues)[which],
-                        Toast.LENGTH_SHORT).show();
-                b.lblStudentCourse.setText(viewModel.getStudentCourse());
+                setResultFromDialog(b.lblStudentCourse, dialog, which, null);
             }
 
             @Override
             public void onItemSelected(DialogInterface dialog, int which) {
-
+                setResultFromDialog(b.lblStudentCourse, dialog, which, null);
             }
         });
         dialog.show(requireActivity().getSupportFragmentManager(), "SimpleSelectionDialogFragment");
@@ -103,21 +132,18 @@ public class DetailStudentFragment extends Fragment {
         }
 
         SimpleSelectionDialogFragment dialog = SimpleSelectionDialogFragment.newInstance("Title",
-                businessNames,
-                "Ok", 0);
+                businessNames, "Ok", 0);
         dialog.setListener(new SimpleSelectionDialogFragment.Listener() {
             @Override
             public void onConfirmSelection(DialogInterface dialog, int which) {
-                viewModel.setStudentCompany(businessNames[which]);
-                Toast.makeText(requireContext(),
-                        viewModel.getStudentCompany(),
-                        Toast.LENGTH_SHORT).show();
-                b.lblStudentCompany.setText(viewModel.getStudentCompany());
+                setResultFromDialog(b.lblStudentCompany, dialog, which, businessNames);
+                viewModel.setStudentBusinessId(bus[which].getId());
             }
 
             @Override
             public void onItemSelected(DialogInterface dialog, int which) {
-
+                setResultFromDialog(b.lblStudentCompany, dialog, which, businessNames);
+                viewModel.setStudentBusinessId(bus[which].getId());
             }
         });
         dialog.show(requireActivity().getSupportFragmentManager(), "SimpleSelectionDialogFragment");
@@ -148,24 +174,57 @@ public class DetailStudentFragment extends Fragment {
                 ValidationUtils.isValidPhone(b.txtTutorPhone.getText().toString()) &&
                 !TextUtils.isEmpty(b.txtTutorSchedule.getText().toString()) &&
                 !TextUtils.isEmpty(b.txtTutorName.getText().toString()) &&
-                !TextUtils.isEmpty(b.lblStudentCompany.getText().toString()) &&
-                !TextUtils.isEmpty(b.lblStudentCourse.getText().toString()) &&
+                !TextUtils.isEmpty(viewModel.getStudentCompany()) &&
+                !TextUtils.isEmpty(viewModel.getStudentCourse()) &&
                 !TextUtils.isEmpty(b.txtStudentName.getText().toString());
     }
 
-    private void obtainArguments() {
-        studentId = DetailStudentFragmentArgs.fromBundle(Objects.requireNonNull(getArguments())).getStudentId();
+    private Student getCurrentStudent() {
+        return new Student(studentId,
+                b.txtStudentName.getText().toString(),
+                Integer.valueOf(b.txtStudentPhone.getText().toString()),
+                b.txtStudentEmail.getText().toString(),
+                viewModel.getStudentCourse(),
+                viewModel.getStudentBusinessId(),
+                b.txtTutorName.getText().toString(),
+                Integer.parseInt(b.txtTutorPhone.getText().toString()),
+                b.txtTutorSchedule.getText().toString());
+    }
+
+    private void save(Student st) {
+        if (grantPermissionToExecuteQuery()) {
+            if (studentId > 0) {
+                viewModel.updateStudent(st);
+                Snackbar.make(b.txtTutorSchedule,
+                        getString(R.string.student_update, st.getName()),
+                        Snackbar.LENGTH_LONG).show();
+                navController.popBackStack();
+            } else {
+                viewModel.addStudent(st);
+                Snackbar.make(b.txtTutorSchedule,
+                        getString(R.string.student_add, st.getName()),
+                        Snackbar.LENGTH_LONG).show();
+                navController.popBackStack();
+            }
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.error_field), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteStudent() {
+        viewModel.deleteStudent(getCurrentStudent());
+        navController.popBackStack();
     }
 
     private void setupFabToolbar() {
         b.fabtoolbarFab.setOnClickListener(v -> b.fabtoolbar.show());
-        b.save.setOnClickListener(v -> {
-            //TODO Insert in database
-            b.fabtoolbar.hide();
-        });
+        b.save.setOnClickListener(v -> save(getCurrentStudent()));
         b.delete.setOnClickListener(v -> {
-            //TODO Delete in database
-            b.fabtoolbar.hide();
+            if (studentId > 0) {
+                deleteStudent();
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.error_no_delete), Toast.LENGTH_SHORT).show();
+            }
         });
         b.dismiss.setOnClickListener(v -> b.fabtoolbar.hide());
     }
@@ -177,40 +236,83 @@ public class DetailStudentFragment extends Fragment {
     }
 
     private void setupEditTexts() {
-        focusHandlingOfEditTexts();
+        editTextFocusHandling();
+        editTextContentHandling();
     }
 
-    private void focusHandlingOfEditTexts() {
+    private void editTextContentHandling() {
+        b.txtStudentName.addTextChangedListener((CustomTextWatcher.onAfterText) s ->
+                EditTextUtils.validateFields(
+                        b.lblStudentName,
+                        b.txtStudentName,
+                        !TextUtils.isEmpty(b.txtStudentName.getText().toString()),
+                        requireContext()));
+
+        b.txtStudentEmail.addTextChangedListener((CustomTextWatcher.onTextChanged)
+                (s, start, before, count) ->
+                        EditTextUtils.validateFields(
+                                b.lblStudentEmail,
+                                b.txtStudentEmail,
+                                ValidationUtils.isValidEmail(b.txtStudentEmail.getText().toString()),
+                                requireContext()));
+
+        b.txtStudentPhone.addTextChangedListener((CustomTextWatcher.onTextChanged)
+                (s, start, before, count) ->
+                        EditTextUtils.validateFields(
+                                b.lblStudentPhone,
+                                b.txtStudentPhone,
+                                ValidationUtils.isValidPhone(b.txtStudentPhone.getText().toString()),
+                                requireContext()));
+
+        b.txtTutorPhone.addTextChangedListener((CustomTextWatcher.onTextChanged)
+                (s, start, before, count) ->
+                        EditTextUtils.validateFields(
+                                b.lblTutorPhone,
+                                b.txtTutorPhone,
+                                ValidationUtils.isValidPhone(b.txtTutorPhone.getText().toString()),
+                                requireContext()));
+
+        b.txtTutorName.addTextChangedListener((CustomTextWatcher.onAfterText) s ->
+                EditTextUtils.validateFields(
+                        b.lblTutorName,
+                        b.txtTutorName,
+                        !TextUtils.isEmpty(b.txtTutorName.getText().toString()),
+                        requireContext()));
+
+        b.txtTutorSchedule.addTextChangedListener((CustomTextWatcher.onTextChanged) (s, start, before, count) ->
+                EditTextUtils.validateFields(
+                        b.lblTutorSchedule,
+                        b.txtTutorSchedule,
+                        !TextUtils.isEmpty(b.txtTutorSchedule.getText().toString()),
+                        requireContext()));
+    }
+
+    private void editTextFocusHandling() {
         b.dummy.setOnClickListener(v -> hideFabToolbar());
-        b.txtStudentEmail.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+        b.txtStudentEmail.setOnFocusChangeListener((v, hasFocus) ->
+        {
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblStudentEmail);
         });
         b.txtStudentName.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblStudentName);
         });
         b.txtStudentPhone.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblStudentPhone);
         });
         b.txtTutorName.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblTutorName);
         });
         b.txtTutorPhone.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblTutorPhone);
         });
         b.txtTutorSchedule.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                hideFabToolbar();
-            }
+            hideFabToolbar();
+            EditTextUtils.changeFontOnFocus(hasFocus, b.lblTutorSchedule);
         });
     }
 
