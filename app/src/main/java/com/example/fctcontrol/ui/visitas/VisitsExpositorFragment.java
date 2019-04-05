@@ -54,10 +54,11 @@ public class VisitsExpositorFragment extends Fragment {
         b.fab.setOnClickListener(v -> navController.navigate(R.id.visitsDetailFragment));
         setupRecyclerView();
         observeStudents();
+        observeVisitTimePreference();
     }
 
     private void setupRecyclerView() {
-        listAdapter = new VisitsExpositorFragmentAdapter(navController);
+        listAdapter = new VisitsExpositorFragmentAdapter(navController, viewModel);
         b.listVisits.setHasFixedSize(true);
         b.listVisits.setItemAnimator(new DefaultItemAnimator());
         b.listVisits.setAdapter(listAdapter);
@@ -68,5 +69,22 @@ public class VisitsExpositorFragment extends Fragment {
             b.lblEmptyView.setVisibility(lastStudentVisits.size() == 0 ? View.VISIBLE : View.INVISIBLE);
             listAdapter.submitList(lastStudentVisits);
         });
+    }
+
+    private void observeVisitTimePreference() {
+        viewModel.getVisitTimePreference().observe(this, s -> viewModel.setVisitTime(getVisitDayTime(s)));
+    }
+
+    private int getVisitDayTime(String preference) {
+        switch (preference) {
+            case "5":
+                return Integer.parseInt(getString(R.string.time_value_one));
+            case "10":
+                return Integer.parseInt(getString(R.string.time_value_two));
+            case "15":
+                return Integer.parseInt(getString(R.string.time_value_three));
+            default:
+                return Integer.parseInt(getString(R.string.time_value_three));
+        }
     }
 }

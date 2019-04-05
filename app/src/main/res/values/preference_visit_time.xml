@@ -5,6 +5,10 @@
     <string name="time_two">10 days</string>
     <string name="time_three">15 days</string>
 
+    <string name="time_value_one">5</string>
+    <string name="time_value_two">10</string>
+    <string name="time_value_three">15</string>
+
     <string-array name="timeEntries">
         <item>@string/time_one</item>
         <item>@string/time_two</item>
@@ -12,11 +16,11 @@
     </string-array>
 
     <string-array name="timeValues">
-        <item>5</item>
-        <item>10</item>
-        <item>15</item>
+        <item>@string/time_value_one</item>
+        <item>@string/time_value_two</item>
+        <item>@string/time_value_three</item>
     </string-array>
 
     <string name="visit_time_key">visitTimeKey</string>
-    <string name="visit_time_default">15</string>
+    <string name="visit_time_default">@string/time_value_three</string>
 </resources>

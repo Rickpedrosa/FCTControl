@@ -2,7 +2,7 @@
     <string name="app_name">FCTControl</string>
     <string name="no_students_yet">No students added yet</string>
     <string name="no_business_yet">No enterprises added yet</string>
-    <string name="no_visits_yet">No visits added yet</string>
+    <string name="no_visits_added_yet">No visits added yet</string>
     <string name="preferences">Preferences</string>
     <string name="about">About</string>
     <string name="business_logo_descp">blp</string>
@@ -21,6 +21,10 @@
     <string name="error_no_delete">You are in add option. There is nothing to delete</string>
     <string name="student_update">1$%s updated!</string>
     <string name="student_add">1$%s added!</string>
+    <string name="no_visits_yet">No visits yet</string>
+    <string name="next_visit">Next visit %s</string>
+    <string name="last_visit">Last visit %s</string>
+    <string name="visit_day">Visit day!</string>
 
     <string-array name="courseValues">
         <item>2DAM</item>

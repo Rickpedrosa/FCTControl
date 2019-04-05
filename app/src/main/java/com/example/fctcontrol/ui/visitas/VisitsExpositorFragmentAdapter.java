@@ -1,12 +1,15 @@
 package com.example.fctcontrol.ui.visitas;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.base.BaseRecyclerViewAdapter;
 import com.example.fctcontrol.databinding.ItemVisitasBinding;
 import com.example.fctcontrol.dto.LastStudentVisit;
+import com.example.fctcontrol.ui.main.MainActivityViewModel;
+import com.example.fctcontrol.utils.TimeCustomUtils;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -16,16 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<LastStudentVisit, VisitsExpositorFragmentAdapter.ViewHolder> {
 
     private NavController navController;
+    private MainActivityViewModel viewModel;
 
-    VisitsExpositorFragmentAdapter(NavController navController) {
+    VisitsExpositorFragmentAdapter(NavController navController, MainActivityViewModel viewModel) {
         this.navController = navController;
+        this.viewModel = viewModel;
         setHasStableIds(true);
     }
 
     @NonNull
     @Override
     public VisitsExpositorFragmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_visitas, parent, false));
+        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.item_visitas, parent, false));
     }
 
     @Override
@@ -43,13 +49,18 @@ public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Last
         }
 
         void bind(LastStudentVisit item) {
-            b.lblLastVisit.setText(item.getDay() == null ? "No visits yet" : item.getDay());
+            b.lblLastVisit.setText(
+                    item.getDay() == null ? itemView.getContext().getString(R.string.no_visits_yet) :
+                            itemView.getContext().getString(R.string.last_visit, item.getDay()));
+
+            b.lblNextVisit.setText(viewModel.getNextVisitDay(viewModel.getVisitTime(), item.getDay()));
+
+            b.lblVisitDay.setVisibility(TimeCustomUtils.willBeToday(item.getDay(), viewModel.getVisitTime()) ?
+                    View.VISIBLE : View.INVISIBLE);
+
             b.lblStudentName.setText(item.getStudentName());
-            b.constraintChildVisits.setOnClickListener(v -> {
-                if (item.getDay() == null) {
-                    navController.navigate(R.id.visitsDetailFragment);
-                }
-            });
         }
+
+
     }
 }
