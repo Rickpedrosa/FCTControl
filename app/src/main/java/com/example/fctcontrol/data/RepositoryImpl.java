@@ -8,9 +8,11 @@ import com.example.fctcontrol.data.local.daos.StudentVisitsDao;
 import com.example.fctcontrol.data.local.daos.VisitsDao;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
+import com.example.fctcontrol.data.local.entity.StudentVisits;
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
 
@@ -120,5 +122,15 @@ public class RepositoryImpl implements Repository {
     @Override
     public void updateVisit(Visits visit) {
         AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> visitsDao.updateVisit(visit));
+    }
+
+    @Override
+    public void addVisitRelation(StudentVisits studentVisits) {
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> studentVisitsDao.addVisitRelation(studentVisits));
+    }
+
+    @Override
+    public LiveData<List<LastStudentVisit>> getLastVisitFromStudents() {
+        return studentVisitsDao.getLastVisitFromStudents();
     }
 }

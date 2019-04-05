@@ -9,8 +9,11 @@ import com.example.fctcontrol.data.RepositoryImpl;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
+import com.example.fctcontrol.data.local.entity.StudentVisits;
+import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
+import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
 
@@ -118,4 +121,16 @@ public class MainActivityViewModel extends AndroidViewModel {
         return repo.getCompaniesCount();
     }
     /*END OF STUDENT FRAGMENTS*/
+
+    /*VISITS FRAGMENT*/
+    public LiveData<List<LastStudentVisit>> getLastVisitFromStudents() {
+        return repo.getLastVisitFromStudents();
+    }
+
+    public void addVisit(Visits visits, StudentVisits studentVisits) {
+        repo.addVisit(visits);
+        repo.addVisitRelation(studentVisits);
+    }
+
+    /*END OF VISITS FRAGMENT*/
 }

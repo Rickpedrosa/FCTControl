@@ -10,17 +10,26 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.data.local.AppDatabase;
+import com.example.fctcontrol.data.local.entity.StudentVisits;
+import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.databinding.FragmentVisitaDetailBinding;
+import com.example.fctcontrol.ui.main.MainActivityViewModel;
+import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
-public class VisitsDetailFragment extends Fragment implements DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener {
+public class VisitsDetailFragment extends Fragment {
 
     private FragmentVisitaDetailBinding b;
+    private MainActivityViewModel viewModel;
+    private NavController navController;
     //TODO Custom dialog to pick students
 
     @Override
@@ -38,15 +47,17 @@ public class VisitsDetailFragment extends Fragment implements DatePickerDialog.O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        viewModel = ViewModelProviders.of(requireActivity(),
+                new MainActivityViewModelFactory(requireActivity().getApplication(),
+                        AppDatabase.getInstance(requireContext()))).get(MainActivityViewModel.class);
+        navController = NavHostFragment.findNavController(this);
+        b.lblDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        //TODO
-    }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        //TODO
-    }
 }
