@@ -1,16 +1,19 @@
 package com.example.fctcontrol.ui.visitas;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.fctcontrol.R;
+import com.example.fctcontrol.base.SimpleSelectionDialogFragment;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.databinding.FragmentExpovisitasBinding;
+import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
+import com.example.fctcontrol.utils.Delivery;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,18 +63,37 @@ public class VisitsExpositorFragment extends Fragment {
                         actionVisitsExpositorFragmentToVisitsDetailFragment().
                         setStudentId(sv.getStudentId()));
             } else {
-                //SACAR EL DIALOGO, Y EL ITEM SELECCIONADO DISPARARÁ
-                //ESTO ->
-                //                navController.navigate(VisitsExpositorFragmentDirections.
-//                        actionVisitsExpositorFragmentToVisitsDetailFragment().
-//                        setVisitId(sv.getVisitId()).setStudentId(sv.getStudentId()));
-                Toast.makeText(requireContext(), "prueba", Toast.LENGTH_SHORT).show();
+                viewModel.getAllVisitsByStudentId(sv.getStudentId()).observe(this, visitsForDialogs -> {
+                    SimpleSelectionDialogFragment selectDialog = SimpleSelectionDialogFragment.newInstance(
+                            sv.getStudentName(), Delivery.deliverDaysArray(visitsForDialogs), "Va", 0);
+
+                    selectDialog.show(requireFragmentManager(), "SimpleSelectionDialogFragment");
+                    selectDialog.setListener(new SimpleSelectionDialogFragment.Listener() {
+                        @Override
+                        public void onConfirmSelection(DialogInterface dialog, int which) {
+                            navigateToStudentVisit(dialog, sv);
+                        }
+
+                        @Override
+                        public void onItemSelected(DialogInterface dialog, int which) {
+                            navigateToStudentVisit(dialog, sv);
+                        }
+                    });
+                });
+
             }
 
         });
         b.listVisits.setHasFixedSize(true);
         b.listVisits.setItemAnimator(new DefaultItemAnimator());
         b.listVisits.setAdapter(listAdapter);
+    }
+
+    private void navigateToStudentVisit(DialogInterface dialog, LastStudentVisit sv) {
+        navController.navigate(VisitsExpositorFragmentDirections.
+                actionVisitsExpositorFragmentToVisitsDetailFragment().
+                setVisitId(sv.getVisitId()).setStudentId(sv.getStudentId()));
+        dialog.dismiss();
     }
 
     private void observeStudents() {

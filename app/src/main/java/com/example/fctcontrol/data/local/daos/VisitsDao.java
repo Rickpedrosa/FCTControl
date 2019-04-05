@@ -2,6 +2,7 @@ package com.example.fctcontrol.data.local.daos;
 
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.LastStudentVisit;
+import com.example.fctcontrol.dto.VisitsForDialog;
 
 import java.util.List;
 
@@ -35,4 +36,9 @@ public interface VisitsDao {
             "GROUP BY st.id " +
             "ORDER BY v.day DESC")
     LiveData<List<LastStudentVisit>> getLastVisitFromAllStudents();
+
+    @Query("SELECT v.id AS visitId, st.id AS studentId, st.name AS studentName, v.day AS visitDay, v.start_hour, v.ending_hour " +
+            "FROM visits v INNER JOIN student st ON v.studentId = st.id " +
+            "WHERE st.id = :studentId")
+    LiveData<List<VisitsForDialog>> getAllVisitsByStudentId(long studentId);
 }

@@ -20,6 +20,7 @@ import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
+import com.example.fctcontrol.utils.Delivery;
 import com.example.fctcontrol.utils.EditTextUtils;
 import com.example.fctcontrol.utils.ValidationUtils;
 import com.google.android.material.snackbar.Snackbar;
@@ -126,23 +127,18 @@ public class DetailStudentFragment extends Fragment {
     }
 
     private void showSelectionDialogCompany(BusinessForDialog[] bus) {
-        String[] businessNames = new String[bus.length];
-        for (int i = 0; i < bus.length; i++) {
-            businessNames[i] = bus[i].getName();
-        }
-
         SimpleSelectionDialogFragment dialog = SimpleSelectionDialogFragment.newInstance("Title",
-                businessNames, "Ok", 0);
+                Delivery.deliverCompaniesArray(bus), "Ok", 0);
         dialog.setListener(new SimpleSelectionDialogFragment.Listener() {
             @Override
             public void onConfirmSelection(DialogInterface dialog, int which) {
-                setResultFromDialog(b.lblStudentCompany, dialog, which, businessNames);
+                setResultFromDialog(b.lblStudentCompany, dialog, which, Delivery.deliverCompaniesArray(bus));
                 viewModel.setStudentBusinessId(bus[which].getId());
             }
 
             @Override
             public void onItemSelected(DialogInterface dialog, int which) {
-                setResultFromDialog(b.lblStudentCompany, dialog, which, businessNames);
+                setResultFromDialog(b.lblStudentCompany, dialog, which, Delivery.deliverCompaniesArray(bus));
                 viewModel.setStudentBusinessId(bus[which].getId());
             }
         });

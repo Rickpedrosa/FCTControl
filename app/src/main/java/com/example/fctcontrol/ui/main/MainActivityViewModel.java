@@ -15,6 +15,7 @@ import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
+import com.example.fctcontrol.dto.VisitsForDialog;
 import com.example.fctcontrol.utils.TimeCustomUtils;
 
 import java.util.List;
@@ -159,6 +160,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void addVisit(Visits visits) {
         repo.addVisit(visits);
+    }
+
+    public LiveData<List<VisitsForDialog>> getAllVisitsByStudentId(long studentId) {
+        return repo.getAllVisitsByStudentId(studentId);
     }
 
     /*END OF VISITS FRAGMENT*/

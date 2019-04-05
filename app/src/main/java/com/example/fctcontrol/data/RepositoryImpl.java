@@ -15,6 +15,7 @@ import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
+import com.example.fctcontrol.dto.VisitsForDialog;
 
 import java.util.List;
 
@@ -127,6 +128,11 @@ public class RepositoryImpl implements Repository {
     @Override
     public LiveData<List<LastStudentVisit>> getLastVisitFromAllStudents() {
         return visitsDao.getLastVisitFromAllStudents();
+    }
+
+    @Override
+    public LiveData<List<VisitsForDialog>> getAllVisitsByStudentId(long studentId) {
+        return visitsDao.getAllVisitsByStudentId(studentId);
     }
 
 }
