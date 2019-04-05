@@ -4,22 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.databinding.FragmentExpovisitasBinding;
-import com.example.fctcontrol.dto.LastStudentVisit;
-import com.example.fctcontrol.ui.empresas.BusinessExpositorFragmentAdapter;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -58,7 +54,21 @@ public class VisitsExpositorFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        listAdapter = new VisitsExpositorFragmentAdapter(navController, viewModel);
+        listAdapter = new VisitsExpositorFragmentAdapter(viewModel, sv -> {
+            if (sv.getVisitId() == 0) {
+                navController.navigate(VisitsExpositorFragmentDirections.
+                        actionVisitsExpositorFragmentToVisitsDetailFragment().
+                        setStudentId(sv.getStudentId()));
+            } else {
+                //SACAR EL DIALOGO, Y EL ITEM SELECCIONADO DISPARARÁ
+                //ESTO ->
+                //                navController.navigate(VisitsExpositorFragmentDirections.
+//                        actionVisitsExpositorFragmentToVisitsDetailFragment().
+//                        setVisitId(sv.getVisitId()).setStudentId(sv.getStudentId()));
+                Toast.makeText(requireContext(), "prueba", Toast.LENGTH_SHORT).show();
+            }
+
+        });
         b.listVisits.setHasFixedSize(true);
         b.listVisits.setItemAnimator(new DefaultItemAnimator());
         b.listVisits.setAdapter(listAdapter);

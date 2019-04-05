@@ -41,6 +41,5 @@ public class TimeCustomUtils {
         return null;
     }
 
-    private TimeCustomUtils() {
-    }
+    private TimeCustomUtils() { }
 }

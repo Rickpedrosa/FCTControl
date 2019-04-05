@@ -56,5 +56,14 @@
     <fragment
         android:id="@+id/visitsDetailFragment"
         android:name="com.example.fctcontrol.ui.visitas.VisitsDetailFragment"
-        android:label="VisitsDetailFragment" />
+        android:label="VisitsDetailFragment" >
+        <argument
+            android:name="visitId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="studentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>

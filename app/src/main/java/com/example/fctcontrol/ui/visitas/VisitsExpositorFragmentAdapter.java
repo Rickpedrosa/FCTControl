@@ -3,6 +3,7 @@ package com.example.fctcontrol.ui.visitas;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.base.BaseRecyclerViewAdapter;
@@ -18,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<LastStudentVisit, VisitsExpositorFragmentAdapter.ViewHolder> {
 
-    private NavController navController;
     private MainActivityViewModel viewModel;
+    private OnVisitClicked onVisitClicked;
 
-    VisitsExpositorFragmentAdapter(NavController navController, MainActivityViewModel viewModel) {
-        this.navController = navController;
+    VisitsExpositorFragmentAdapter(
+            MainActivityViewModel viewModel,
+            OnVisitClicked onVisitClicked) {
         this.viewModel = viewModel;
+        this.onVisitClicked = onVisitClicked;
         setHasStableIds(true);
     }
 
@@ -46,6 +49,7 @@ public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Last
         ViewHolder(@NonNull ItemVisitasBinding itemView) {
             super(itemView.getRoot());
             b = itemView;
+            itemView.getRoot().setOnClickListener(v -> onVisitClicked.navigateToDetail(getItem(getAdapterPosition())));
         }
 
         void bind(LastStudentVisit item) {
