@@ -10,7 +10,7 @@ public class LastStudentVisit {
     private long visitId;
     @ColumnInfo(name = "studentName")
     private String studentName;
-    @ColumnInfo(name = "day")
+    @ColumnInfo(name = "maxDay")
     private String day;
     @ColumnInfo(name = "start_hour")
     private String start_hour;

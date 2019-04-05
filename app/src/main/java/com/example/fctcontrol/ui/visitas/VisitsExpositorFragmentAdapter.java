@@ -1,7 +1,6 @@
 package com.example.fctcontrol.ui.visitas;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fctcontrol.R;
@@ -18,7 +17,7 @@ public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Last
 
     private NavController navController;
 
-    public VisitsExpositorFragmentAdapter(NavController navController) {
+    VisitsExpositorFragmentAdapter(NavController navController) {
         this.navController = navController;
         setHasStableIds(true);
     }

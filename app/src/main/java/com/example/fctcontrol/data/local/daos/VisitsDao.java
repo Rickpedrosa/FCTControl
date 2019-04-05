@@ -1,7 +1,7 @@
 package com.example.fctcontrol.data.local.daos;
 
-import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.Visits;
+import com.example.fctcontrol.dto.LastStudentVisit;
 
 import java.util.List;
 
@@ -29,4 +29,10 @@ public interface VisitsDao {
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void updateVisit(Visits visit);
+
+    @Query("SELECT st.id AS stId, v.id AS vId, st.name AS studentName, MAX(v.day) AS maxDay, v.start_hour, v.ending_hour " +
+            "FROM student st LEFT JOIN visits v ON v.studentId = st.id " +
+            "GROUP BY st.id " +
+            "ORDER BY v.day DESC")
+    LiveData<List<LastStudentVisit>> getLastVisitFromAllStudents();
 }

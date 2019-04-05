@@ -2,9 +2,19 @@ package com.example.fctcontrol.data.local.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "visits")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "visits",
+        indices = {@Index(value = {"day", "studentId"}), @Index(value = "studentId")},
+        foreignKeys = @ForeignKey(entity = Student.class,
+                parentColumns = "id",
+                childColumns = "studentId",
+                onUpdate = CASCADE,
+                onDelete = CASCADE))
 public class Visits {
 
     @PrimaryKey(autoGenerate = true)
@@ -17,14 +27,16 @@ public class Visits {
     private String ending_hour;
     @ColumnInfo(name = "commentary")
     private String commentary;
+    @ColumnInfo(name = "studentId")
+    private long studentId;
 
-    public Visits(long id, String day, String start_hour,
-                  String ending_hour, String commentary) {
+    public Visits(long id, String day, String start_hour, String ending_hour, String commentary, long studentId) {
         this.id = id;
         this.day = day;
         this.start_hour = start_hour;
         this.ending_hour = ending_hour;
         this.commentary = commentary;
+        this.studentId = studentId;
     }
 
     public long getId() {
@@ -65,5 +77,13 @@ public class Visits {
 
     public void setCommentary(String commentary) {
         this.commentary = commentary;
+    }
+
+    public long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(long studentId) {
+        this.studentId = studentId;
     }
 }

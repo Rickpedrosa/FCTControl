@@ -11,24 +11,29 @@ import com.example.fctcontrol.data.local.entity.Student;
 import com.example.fctcontrol.data.local.entity.StudentVisits;
 import com.example.fctcontrol.data.local.entity.Visits;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities =
         {Student.class,
                 Visits.class,
                 Business.class,
                 StudentVisits.class},
-        version = 1)
+        version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "fct_rick_pedrosa";
     //UN CAMPO INTEGER PRIMARY KEY SIEMPRE SERÁ AUTO_INCREMENT DE FORMA IMPLÍCITA LOL
+    //PARA CUALQUIER CAMBIO QUE IMPLIQUE ALTER TABLE BIEN TOTXO SE HA DE RECREAR LA CREACIÓN DE TABLA
 //    private static final Migration MIGRATION_1_TO_2 = new Migration(1, 2) {
 //        @Override
 //        public void migrate(@NonNull SupportSQLiteDatabase database) {
-//
+//            database.execSQL("ALTER TABLE visits ADD COLUMN studentId INTEGER DEFAULT NULL");
+//            database.execSQL("ALTER TABLE visits ADD ");
 //        }
 //    };
 

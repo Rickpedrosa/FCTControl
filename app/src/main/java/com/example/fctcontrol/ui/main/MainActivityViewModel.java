@@ -124,12 +124,11 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     /*VISITS FRAGMENT*/
     public LiveData<List<LastStudentVisit>> getLastVisitFromStudents() {
-        return repo.getLastVisitFromStudents();
+        return repo.getLastVisitFromAllStudents();
     }
 
-    public void addVisit(Visits visits, StudentVisits studentVisits) {
+    public void addVisit(Visits visits){
         repo.addVisit(visits);
-        repo.addVisitRelation(studentVisits);
     }
 
     /*END OF VISITS FRAGMENT*/

@@ -58,13 +58,12 @@ public interface Repository {
 
     void updateVisit(Visits visit);
 
+    LiveData<List<LastStudentVisit>> getLastVisitFromAllStudents();
+
     /****************/
 
     /*STUDENTS-VISITS DAO*/
     //TODO methods from dao
-    void addVisitRelation(StudentVisits studentVisits);
-
-    LiveData<List<LastStudentVisit>> getLastVisitFromStudents();
     /**********************/
 
 }

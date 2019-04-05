@@ -125,12 +125,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void addVisitRelation(StudentVisits studentVisits) {
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> studentVisitsDao.addVisitRelation(studentVisits));
+    public LiveData<List<LastStudentVisit>> getLastVisitFromAllStudents() {
+        return visitsDao.getLastVisitFromAllStudents();
     }
 
-    @Override
-    public LiveData<List<LastStudentVisit>> getLastVisitFromStudents() {
-        return studentVisitsDao.getLastVisitFromStudents();
-    }
 }

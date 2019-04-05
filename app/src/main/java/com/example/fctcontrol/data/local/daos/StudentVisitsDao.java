@@ -16,13 +16,6 @@ import androidx.room.Update;
 @Dao
 public interface StudentVisitsDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addVisitRelation(StudentVisits studentVisits);
 
-    @Query("SELECT st.name AS studentName, v.day, v.start_hour," +
-            " v.ending_hour, sv.visitId AS vId, sv.studentId AS stId " +
-            "FROM student st INNER JOIN studentVisits sv ON st.id = sv.studentId " +
-            "INNER JOIN visits v ON sv.visitId = v.id")
-    LiveData<List<LastStudentVisit>> getLastVisitFromStudents();
 
 }

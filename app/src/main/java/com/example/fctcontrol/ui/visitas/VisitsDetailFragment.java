@@ -17,6 +17,8 @@ import com.example.fctcontrol.databinding.FragmentVisitaDetailBinding;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
 
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -54,7 +56,9 @@ public class VisitsDetailFragment extends Fragment {
         b.lblDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //"05/04/2019"
+                viewModel.addVisit(new Visits(0, new Date().toString(), "08:22", "10:00", "", 1));
+                navController.popBackStack();
             }
         });
     }
