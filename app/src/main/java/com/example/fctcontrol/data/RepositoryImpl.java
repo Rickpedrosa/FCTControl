@@ -8,13 +8,13 @@ import com.example.fctcontrol.data.local.daos.StudentVisitsDao;
 import com.example.fctcontrol.data.local.daos.VisitsDao;
 import com.example.fctcontrol.data.local.entity.Business;
 import com.example.fctcontrol.data.local.entity.Student;
-import com.example.fctcontrol.data.local.entity.StudentVisits;
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.BusinessForDialog;
 import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
+import com.example.fctcontrol.dto.StudentVisitDetail;
 import com.example.fctcontrol.dto.VisitsForDialog;
 
 import java.util.List;
@@ -101,13 +101,18 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public LiveData<String> getStudentName(long studentId) {
+        return studentDao.getStudentName(studentId);
+    }
+
+    @Override
     public LiveData<List<Visits>> getAllVisits() {
         return visitsDao.getAllVisits();
     }
 
     @Override
-    public LiveData<Visits> getVisitById(long visitId) {
-        return visitsDao.getVisitById(visitId);
+    public LiveData<StudentVisitDetail> getVisitById(long visitId, long studentId) {
+        return visitsDao.getVisitById(visitId, studentId);
     }
 
     @Override

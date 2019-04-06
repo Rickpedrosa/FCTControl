@@ -15,6 +15,7 @@ import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
+import com.example.fctcontrol.dto.StudentVisitDetail;
 import com.example.fctcontrol.dto.VisitsForDialog;
 import com.example.fctcontrol.utils.TimeCustomUtils;
 
@@ -35,6 +36,13 @@ public class MainActivityViewModel extends AndroidViewModel {
     private String studentCompany;
     private long studentBusinessId;
     private int visitTime;
+
+    private String dayOfVisit;
+    private String calendarDayOfVisit;
+    private String startTime;
+    private String startTimeUtil;
+    private String endingTime;
+    private String endingTimeUtil;
 
     MainActivityViewModel(@NonNull Application application, AppDatabase database) {
         super(application);
@@ -71,7 +79,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public String getNextVisitDay(int time, String lastDay) {
         if (lastDay != null) {
-            return application.getString(R.string.next_visit, TimeCustomUtils.getDateFormatted(lastDay, time));
+            return application.getString(R.string.next_visit, TimeCustomUtils.getStringDateFormatted(lastDay, time));
         }
         return application.getApplicationContext().getString(R.string.no_visits_yet);
     }
@@ -164,6 +172,65 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<List<VisitsForDialog>> getAllVisitsByStudentId(long studentId) {
         return repo.getAllVisitsByStudentId(studentId);
+    }
+
+    public LiveData<String> getStudentName(long studentId) {
+        return repo.getStudentName(studentId);
+    }
+
+    public LiveData<StudentVisitDetail> getVisitById(long visitId, long studentId) {
+        return repo.getVisitById(visitId, studentId);
+    }
+
+    public String getDayOfVisit() {
+        return dayOfVisit;
+    }
+
+    public void setDayOfVisit(String year, String month, String day) {
+        String format = "%s-%s-%s";
+        this.dayOfVisit = String.format(format, day, month, year);
+    }
+
+    public String getCalendarDayOfVisit() {
+        return calendarDayOfVisit;
+    }
+
+    public void setCalendarDayOfVisit(String calendarDayOfVisit) {
+        this.calendarDayOfVisit = calendarDayOfVisit;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String hours, String minutes) {
+        String format = "%s:%s";
+        this.startTime = String.format(format, hours, minutes);
+    }
+
+    public String getEndingTime() {
+        return endingTime;
+    }
+
+    public void setEndingTime(String hours, String minutes) {
+        String format = "%s:%s";
+        this.endingTime = String.format(format, hours, minutes);
+    }
+
+    public String getStartTimeUtil() {
+        return startTimeUtil;
+    }
+
+    public void setStartTimeUtil(String startTimeUtil) {
+        this.startTimeUtil = startTimeUtil;
+    }
+
+    public String getEndingTimeUtil() {
+        return endingTimeUtil;
+    }
+
+    public void setEndingTimeUtil(String endingTimeUtil) {
+        this.endingTimeUtil = endingTimeUtil;
     }
 
     /*END OF VISITS FRAGMENT*/

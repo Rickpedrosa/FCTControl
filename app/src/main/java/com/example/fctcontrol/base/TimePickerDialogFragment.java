@@ -24,8 +24,8 @@ public class TimePickerDialogFragment extends DialogFragment {
     private boolean is24Hour;
 
     @SuppressWarnings("unused")
-    public static DatePickerDialogFragment newInstance(int hours, int minutes, boolean is24Hour) {
-        DatePickerDialogFragment frg = new DatePickerDialogFragment();
+    public static TimePickerDialogFragment newInstance(int hours, int minutes, boolean is24Hour) {
+        TimePickerDialogFragment frg = new TimePickerDialogFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(ARG_HOURS, hours);
         arguments.putInt(ARG_MINUTES, minutes);
@@ -64,19 +64,7 @@ public class TimePickerDialogFragment extends DialogFragment {
         return new TimePickerDialog(requireActivity(), listener, hours, minutes, is24Hour);
     }
 
-    @Override
-    public void onAttach(@NonNull Context activity) {
-        super.onAttach(activity);
-        try {
-            if (getTargetFragment() != null) {
-                listener = (OnTimeSetListener) getTargetFragment();
-            } else {
-                listener = (OnTimeSetListener) activity;
-            }
-        } catch (ClassCastException e) {
-            throw new ClassCastException(
-                    "Listener must implement TimePickerDialog.OnTimeSetListener");
-        }
+    public void setListener(OnTimeSetListener listener) {
+        this.listener = listener;
     }
-
 }

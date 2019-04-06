@@ -3,14 +3,13 @@ package com.example.fctcontrol.base;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
+
+import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
-import java.util.Calendar;
 
 public class DatePickerDialogFragment extends DialogFragment {
 
@@ -64,18 +63,7 @@ public class DatePickerDialogFragment extends DialogFragment {
         return new DatePickerDialog(requireActivity(), listener, year, month, day);
     }
 
-    @Override
-    public void onAttach(@NonNull Context activity) {
-        super.onAttach(activity);
-        try {
-            if (getTargetFragment() != null) {
-                listener = (OnDateSetListener) getTargetFragment();
-            } else {
-                listener = (OnDateSetListener) activity;
-            }
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Listener must implement DatePickerDialogFragment.OnDateSetListener");
-        }
+    public void setListener(OnDateSetListener listener) {
+        this.listener = listener;
     }
-
 }

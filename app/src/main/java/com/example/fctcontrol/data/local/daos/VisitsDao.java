@@ -2,6 +2,7 @@ package com.example.fctcontrol.data.local.daos;
 
 import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.dto.LastStudentVisit;
+import com.example.fctcontrol.dto.StudentVisitDetail;
 import com.example.fctcontrol.dto.VisitsForDialog;
 
 import java.util.List;
@@ -19,8 +20,10 @@ public interface VisitsDao {
     @Query("SELECT * FROM visits")
     LiveData<List<Visits>> getAllVisits();
 
-    @Query("SELECT * FROM visits WHERE id = :visitId")
-    LiveData<Visits> getVisitById(long visitId);
+    @Query("SELECT st.id AS stId, v.id AS vId, st.name AS studentName, v.day, v.start_hour, v.ending_hour, v.commentary AS comments " +
+            "FROM visits v INNER JOIN student st ON v.studentId = st.id " +
+            "WHERE v.id = :visitId AND st.id = :studentId")
+    LiveData<StudentVisitDetail> getVisitById(long visitId, long studentId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addVisit(Visits visit);

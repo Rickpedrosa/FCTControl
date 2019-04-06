@@ -9,6 +9,7 @@ import com.example.fctcontrol.dto.BusinessResume;
 import com.example.fctcontrol.dto.LastStudentVisit;
 import com.example.fctcontrol.dto.StudentDetail;
 import com.example.fctcontrol.dto.StudentResume;
+import com.example.fctcontrol.dto.StudentVisitDetail;
 import com.example.fctcontrol.dto.VisitsForDialog;
 
 import java.util.List;
@@ -46,12 +47,14 @@ public interface Repository {
 
     void updateStudent(Student student);
 
+    LiveData<String> getStudentName(long studentId);
+
     /*************/
 
     /*VISITS DAO*/
     LiveData<List<Visits>> getAllVisits();
 
-    LiveData<Visits> getVisitById(long visitId);
+    LiveData<StudentVisitDetail> getVisitById(long visitId, long studentId);
 
     void addVisit(Visits visit);
 

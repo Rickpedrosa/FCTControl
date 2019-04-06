@@ -26,6 +26,9 @@ public interface StudentDao {
             " FROM student st INNER JOIN business b ON st.businessId = b.id WHERE st.id = :studentId")
     LiveData<StudentDetail> getStudentById(long studentId);
 
+    @Query("SELECT name FROM student WHERE id = :studentId")
+    LiveData<String> getStudentName(long studentId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addStudent(Student student);
 
