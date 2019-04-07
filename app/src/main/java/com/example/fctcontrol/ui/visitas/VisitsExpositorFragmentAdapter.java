@@ -49,7 +49,10 @@ public class VisitsExpositorFragmentAdapter extends BaseRecyclerViewAdapter<Last
         ViewHolder(@NonNull ItemVisitasBinding itemView) {
             super(itemView.getRoot());
             b = itemView;
-            itemView.getRoot().setOnClickListener(v -> onVisitClicked.navigateToDetail(getItem(getAdapterPosition())));
+            itemView.getRoot().setOnClickListener(v -> {
+                viewModel.triggerClickDialog(getItem(getAdapterPosition()).getStudentId());
+                onVisitClicked.navigateToDetail(getItem(getAdapterPosition()));
+            });
         }
 
         void bind(LastStudentVisit item) {

@@ -22,8 +22,11 @@ import com.example.fctcontrol.utils.TimeCustomUtils;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.preference.PreferenceManager;
 
 public class MainActivityViewModel extends AndroidViewModel {
@@ -36,13 +39,21 @@ public class MainActivityViewModel extends AndroidViewModel {
     private String studentCompany;
     private long studentBusinessId;
     private int visitTime;
-
     private String dayOfVisit;
     private String calendarDayOfVisit;
     private String startTime;
     private String startTimeUtil;
     private String endingTime;
     private String endingTimeUtil;
+    private MutableLiveData<Long> triggerDialogShow = new MutableLiveData<>();
+    private LiveData<List<VisitsForDialog>> allVisitsForDialog = Transformations.switchMap(
+            triggerDialogShow,
+            new Function<Long, LiveData<List<VisitsForDialog>>>() {
+        @Override
+        public LiveData<List<VisitsForDialog>> apply(Long input) {
+            return repo.getAllVisitsByStudentId(input);
+        }
+    });
 
     MainActivityViewModel(@NonNull Application application, AppDatabase database) {
         super(application);
@@ -170,6 +181,14 @@ public class MainActivityViewModel extends AndroidViewModel {
         repo.addVisit(visits);
     }
 
+    public void updateVisit(Visits visits) {
+        repo.updateVisit(visits);
+    }
+
+    public void deleteVisit(Visits visits) {
+        repo.deleteVisit(visits);
+    }
+
     public LiveData<List<VisitsForDialog>> getAllVisitsByStudentId(long studentId) {
         return repo.getAllVisitsByStudentId(studentId);
     }
@@ -231,6 +250,14 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void setEndingTimeUtil(String endingTimeUtil) {
         this.endingTimeUtil = endingTimeUtil;
+    }
+
+    public void triggerClickDialog(long id) {
+        triggerDialogShow.setValue(id);
+    }
+
+    public LiveData<List<VisitsForDialog>> getAllVisitsForDialog() {
+        return allVisitsForDialog;
     }
 
     /*END OF VISITS FRAGMENT*/

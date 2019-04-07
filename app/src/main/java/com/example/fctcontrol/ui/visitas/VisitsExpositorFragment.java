@@ -11,14 +11,18 @@ import com.example.fctcontrol.base.SimpleSelectionDialogFragment;
 import com.example.fctcontrol.data.local.AppDatabase;
 import com.example.fctcontrol.databinding.FragmentExpovisitasBinding;
 import com.example.fctcontrol.dto.LastStudentVisit;
+import com.example.fctcontrol.dto.VisitsForDialog;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
 import com.example.fctcontrol.ui.main.MainActivityViewModelFactory;
 import com.example.fctcontrol.utils.Delivery;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -57,32 +61,35 @@ public class VisitsExpositorFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        listAdapter = new VisitsExpositorFragmentAdapter(viewModel, sv -> {
-            if (sv.getVisitId() == 0) {
-                navController.navigate(VisitsExpositorFragmentDirections.
-                        actionVisitsExpositorFragmentToVisitsDetailFragment().
-                        setStudentId(sv.getStudentId()));
-            } else {
-                viewModel.getAllVisitsByStudentId(sv.getStudentId()).observe(this, visitsForDialogs -> {
-                    SimpleSelectionDialogFragment selectDialog = SimpleSelectionDialogFragment.newInstance(
-                            sv.getStudentName(), Delivery.deliverDaysArray(visitsForDialogs), "Va", 0);
-
-                    selectDialog.show(requireFragmentManager(), "SimpleSelectionDialogFragment");
-                    selectDialog.setListener(new SimpleSelectionDialogFragment.Listener() {
+        listAdapter = new VisitsExpositorFragmentAdapter(viewModel, new OnVisitClicked() {
+            @Override
+            public void navigateToDetail(LastStudentVisit sv) {
+                if (sv.getVisitId() == 0) {
+                    navController.navigate(VisitsExpositorFragmentDirections.
+                            actionVisitsExpositorFragmentToVisitsDetailFragment().
+                            setStudentId(sv.getStudentId()));
+                } else {
+                    viewModel.getAllVisitsForDialog().observe(VisitsExpositorFragment.this, new Observer<List<VisitsForDialog>>() {
                         @Override
-                        public void onConfirmSelection(DialogInterface dialog, int which) {
-                            navigateToStudentVisit(dialog, sv);
-                        }
+                        public void onChanged(List<VisitsForDialog> visitsForDialogs) {
+                            SimpleSelectionDialogFragment selectDialog = SimpleSelectionDialogFragment.newInstance(
+                                    sv.getStudentName(), Delivery.deliverDaysArray(visitsForDialogs), "Va", 0);
+                            selectDialog.setListener(new SimpleSelectionDialogFragment.Listener() {
+                                @Override
+                                public void onConfirmSelection(DialogInterface dialog, int which) {
+                                    navigateToStudentVisit(dialog, sv);
+                                }
 
-                        @Override
-                        public void onItemSelected(DialogInterface dialog, int which) {
-                            navigateToStudentVisit(dialog, sv);
+                                @Override
+                                public void onItemSelected(DialogInterface dialog, int which) {
+                                    navigateToStudentVisit(dialog, sv);
+                                }
+                            });
+                            selectDialog.show(VisitsExpositorFragment.this.requireFragmentManager(), "SimpleSelectionDialogFragment");
                         }
                     });
-                });
-
+                }
             }
-
         });
         b.listVisits.setHasFixedSize(true);
         b.listVisits.setItemAnimator(new DefaultItemAnimator());
@@ -119,4 +126,5 @@ public class VisitsExpositorFragment extends Fragment {
                 return Integer.parseInt(getString(R.string.time_value_three));
         }
     }
+
 }

@@ -1,14 +1,18 @@
 package com.example.fctcontrol.ui.visitas;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.fctcontrol.R;
 import com.example.fctcontrol.base.DatePickerDialogFragment;
 import com.example.fctcontrol.base.TimePickerDialogFragment;
 import com.example.fctcontrol.data.local.AppDatabase;
+import com.example.fctcontrol.data.local.entity.Visits;
 import com.example.fctcontrol.databinding.FragmentVisitaDetailBinding;
 import com.example.fctcontrol.dto.StudentVisitDetail;
 import com.example.fctcontrol.ui.main.MainActivityViewModel;
@@ -32,7 +36,6 @@ public class VisitsDetailFragment extends Fragment {
     private NavController navController;
     private long studentId;
     private long visitId;
-    //TODO Custom dialog to pick students
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +59,17 @@ public class VisitsDetailFragment extends Fragment {
         obtainArguments();
         observeLiveData();
         setupDialogs();
+        commentsEditTextTouch();
+        setupFabToolbar();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void commentsEditTextTouch() {
+        b.txtComments.setOnTouchListener((v, event) -> {
+            v.setFocusable(true);
+            v.setFocusableInTouchMode(true);
+            return false;
+        });
     }
 
     private void obtainArguments() {
@@ -116,7 +130,6 @@ public class VisitsDetailFragment extends Fragment {
         }
     }
 
-    //TODO CAMBIAR NEWINSTANCE() POR NEWINSTANCE(PARAMS) EN VISITID=0
     private void setupDialogs() {
         setDatePickerDialog();
         setTimePickerDialog();
@@ -125,6 +138,13 @@ public class VisitsDetailFragment extends Fragment {
     private void setDatePickerDialog() {
         b.btnDay.setOnClickListener(v ->
                 setupDateDialog(TimeCustomUtils.getDayMonthYear(viewModel.getCalendarDayOfVisit())));
+    }
+
+    private void setTimePickerDialog() {
+        b.btnStartTime.setOnClickListener(v ->
+                setupStartTimeDialog(TimeCustomUtils.getHoursMinutes(viewModel.getStartTimeUtil())));
+        b.btnEndTime.setOnClickListener(v ->
+                setupEndingTimeDialog(TimeCustomUtils.getHoursMinutes(viewModel.getEndingTimeUtil())));
     }
 
     private void setupDateDialog(int[] studentVisitDateValues) {
@@ -140,15 +160,9 @@ public class VisitsDetailFragment extends Fragment {
                     String.valueOf(dayOfMonth));
             b.lblValueDay.setText(viewModel.getDayOfVisit());
             viewModel.setCalendarDayOfVisit(viewModel.getDayOfVisit());
+            datePick.dismiss();
         });
         datePick.show(requireFragmentManager(), "DatePickerDialogFragment");
-    }
-
-    private void setTimePickerDialog() {
-        b.btnStartTime.setOnClickListener(v ->
-                setupStartTimeDialog(TimeCustomUtils.getHoursMinutes(viewModel.getStartTimeUtil())));
-        b.btnEndTime.setOnClickListener(v ->
-                setupEndingTimeDialog(TimeCustomUtils.getHoursMinutes(viewModel.getEndingTimeUtil())));
     }
 
     private void setupEndingTimeDialog(int[] hoursMinutes) {
@@ -159,6 +173,7 @@ public class VisitsDetailFragment extends Fragment {
             viewModel.setEndingTime(String.valueOf(hourOfDay), String.valueOf(minute));
             b.lblEndTimeValue.setText(viewModel.getEndingTime());
             viewModel.setEndingTimeUtil(viewModel.getEndingTime());
+            timeDialog.dismiss();
         });
         timeDialog.show(requireFragmentManager(), "TimePickerDialogFragment");
     }
@@ -171,9 +186,46 @@ public class VisitsDetailFragment extends Fragment {
             viewModel.setStartTime(String.valueOf(hourOfDay), String.valueOf(minute));
             b.lblStartTimeValue.setText(viewModel.getStartTime());
             viewModel.setStartTimeUtil(viewModel.getStartTime());
+            timeDialog.dismiss();
         });
         timeDialog.show(requireFragmentManager(), "TimePickerDialogFragment");
     }
 
+    private Visits getCurrentVisit() {
+        return new Visits(visitId,
+                b.lblValueDay.getText().toString(),
+                b.lblStartTimeValue.getText().toString(),
+                b.lblEndTimeValue.getText().toString(),
+                b.txtComments.getText().toString(),
+                studentId);
+    }
+
+    private void setupFabToolbar() {
+        b.fabtoolbarFab.setOnClickListener(v -> b.fabtoolbar.show());
+        b.save.setOnClickListener(v -> save(getCurrentVisit()));
+        b.delete.setOnClickListener(v -> {
+            if (visitId > 0) {
+                deleteVisit();
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.error_no_delete), Toast.LENGTH_SHORT).show();
+            }
+        });
+        b.dismiss.setOnClickListener(v -> b.fabtoolbar.hide());
+    }
+
+    private void save(Visits visits) {
+        if (visitId != 0) {
+            viewModel.updateVisit(visits);
+            navController.popBackStack();
+        } else {
+            viewModel.addVisit(visits);
+            navController.popBackStack();
+        }
+    }
+
+    private void deleteVisit() {
+        viewModel.deleteVisit(getCurrentVisit());
+        navController.popBackStack();
+    }
 
 }
